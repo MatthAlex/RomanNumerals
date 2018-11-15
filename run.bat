@@ -18,4 +18,4 @@ del *.obj
 ::mpiexec -machinefile machines -genv I_MPI_PIN_PROCS 0,2,1,3 -n 1  C:\MPI_core3\CA_MPI.exe 
 
 
-call ifort /traceback CA_MPI.f90
+call ifort /traceback RomanNum.f90
