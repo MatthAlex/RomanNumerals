@@ -2,7 +2,7 @@
       USE PARAMETERS    !, only: SingleRomanValues, DoubleRomanValues  ! DEBUG
       implicit none
       
-      integer(kind=2) :: Numeral1_Integer, Numeral2_Integer, Sum_Integer
+      integer(kind=2) :: Numeral1_Integer, Numeral2_Integer, Sum_Integer, i
       character(LEN=20) :: comm_arg1, comm_arg2
       character(LEN=:), allocatable :: Numeral1_String, Numeral2_String, NumeralFinal_String
 
@@ -24,7 +24,16 @@
       CALL BUFFER_TO_STRING(comm_arg2, Numeral2_String)   ! Adjust to the left and trim trailing spaces from the string
       CALL CHECK_VALIDITY(Numeral2_String)   ! Check the input for invalid ASCII characters, return true/false 
       
-    
+      
+      IF (testing == 1) THEN  ! create an ascii file
+      open(12,file='ascii2.dat',access='append')
+        DO i = 1, 255
+          CALL ASCII_INPUT(Numeral2_String,i)
+          WRITE(12,*) 'RomanNum I ',adjustl(Numeral2_String)
+        ENDDO
+      close(12)
+      END IF
+
       !WRITE(*,'(A)') ROMAN(1998)
 
       Numeral1_Integer = DECODER(Numeral1_String)
@@ -38,7 +47,7 @@
       !NumeralFinal_String = ROMAN(Sum_Integer)
       !WRITE(*,'(A)') NumeralFinal_String
 
-      ! CALL TEST_VALID_INPUT(Numeral2_String)  ! TO DO
+      
 
 
 
@@ -311,6 +320,17 @@
       END IF
       
       end SUBROUTINE COUNTING
+      !==================================================================================================================
+
+      !==================================================================================================================
+      SUBROUTINE ASCII_INPUT(ascii,i)
+      implicit none
+      character(LEN=*), intent(out) :: ascii
+      integer(kind=2), intent(in) :: i
+
+      ascii = achar(i)
+      
+      end SUBROUTINE ASCII_INPUT
       !==================================================================================================================
 
 
