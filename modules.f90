@@ -1,7 +1,7 @@
       MODULE PARAMETERS
       implicit none
       
-      character(LEN=1) :: ValidArray(7)
+      character(LEN=1) :: ValidArray(14)
       character(LEN=2) :: ValidArrayPlus(6)
       character(LEN=2) :: ValidArrayAll(13)
 
@@ -10,7 +10,7 @@
       integer(kind=2) :: RomanValues(13)= (/1,4,5,9,10,40,50,90,100,400,500,900,1000/)
       integer(kind=2) :: validCount(13)= (/3,1,1,1,3,1,1,1,3,1,1,1,3/)
 
-      DATA ValidArray / 'I', 'V', 'X', 'L', 'C', 'D', 'M' / ! populate character array of 7 1-length characters
+      DATA ValidArray / 'I','i', 'V','v', 'X','x', 'L','l', 'C','c', 'D','d', 'M','m' / ! populate character array of 7 1-length characters
       DATA ValidArrayPlus / 'IV', 'IX', 'XL', 'XC', 'CD', 'CM' / ! populate character array of 6 2-length characters
       DATA ValidArrayAll /'I','IV','V','IX','X','XL','L','XC','C','CD','D','CM','M' / ! populate all roman numerals in one array - will need trim
 
