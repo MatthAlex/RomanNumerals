@@ -245,7 +245,7 @@
           
           IF (real(lastval).eq.real(n)*4/9) THEN      !lastval>1.and.
             WRITE(*,*) 'INVALID NUMERAL SUCCESSION. 2 DOUBLEVAL NUMERALS in succession'    ! if the new value is the second doubleVal in succession, abort 
-            STOP
+            EXIT
           END IF
         
         ELSE !IF (n  lastval.and.lastval.gt.0) THEN
