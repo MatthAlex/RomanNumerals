@@ -259,12 +259,12 @@
             STOP  ! ...STOP the program. This traps double value numerals followed by smaller numerals, which their sum would be assigned a larger value numeral (eg IXV = 9+5 = 14 = XIV)
           END IF
         
-        ELSE                                                              ! IF newValue < previousValue
+        ELSE            ! if newValue < previousValue
           WRITE(*,*) 'INVALID NUMERAL SUCCESSION' 
           STOP
         END IF
         
-        previousValue = newValue                                          ! update the previous value in preparation of next iteration
+        previousValue = newValue    ! update the previous value in preparation of next iteration
       END DO
       END FUNCTION DECODER
       !==================================================================================================================
