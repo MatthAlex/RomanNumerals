@@ -7,6 +7,6 @@
       integer(kind=2) :: RomanNumberValues(13)= (/1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1/)
       integer(kind=2) :: validCount(13)= (/3,1,1,1,3,1,1,1,3,1,1,1,3/)  ! the valid numeral count corresponds to Roman Numerals up to 3999 in value.
 
-      logical         :: debugMode = .TRUE.
+      logical         :: debugMode = .FALSE.
 
       END MODULE

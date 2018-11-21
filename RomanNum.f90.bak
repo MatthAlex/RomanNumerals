@@ -2,36 +2,36 @@
       USE parameters, only: debugMode
       implicit none
       
-      integer(kind=2) :: Number_1, Number_2, NumberSum
-      character(LEN=20) :: command_line_argument_1, command_line_argument_2
+      integer(kind=2)               :: Number_1, Number_2, NumberSum
+      character(LEN=20)             :: command_line_argument_1, command_line_argument_2
       character(LEN=:), allocatable :: Numeral_1, Numeral_2, NumeralSum
 
       ! -----------------------  Initializations
       Number_1 = 0; Number_2 = 0
       ! -------------------------------------------^^^
 
-      CALL GET_COMMAND_ARGUMENT(1, command_line_argument_1)   ! Read argument #1 
-      CALL GET_COMMAND_ARGUMENT(2, command_line_argument_2)   ! and #2 from the command line, and assign it to comm_arg#
-
       ! -----------------------
-      ! This program takes the user input of two Roman Numerals and produces and outputs the sum as a Numeral
-      ! The valid Numeral values are I, V, X, L, C, D, and M and their lowercase
+      ! This program takes the input of two Roman Numerals and produces and outputs the sum as a Numeral.
+      ! The valid Numeral values are I, V, X, L, C, D, and M and their lowercase.
       ! Invalid input includes all other ASCII characters.
       
+      CALL GET_COMMAND_ARGUMENT(1, command_line_argument_1)   ! Read argument #1 
+      CALL GET_COMMAND_ARGUMENT(2, command_line_argument_2)   ! and #2 from the command line, and assign it to command_line_argument#
+
       CALL BUFFER_TO_STRING(command_line_argument_1, Numeral_1)   ! Adjust to the left and trim trailing spaces from the string 
-      CALL CHECK_VALIDITY(Numeral_1)   ! Check the input for invalid ASCII characters, return true or STOP the program
+      CALL CHECK_STRING_VALID(Numeral_1)   ! Check the input for invalid ASCII characters, return true or STOP the program
       
       CALL BUFFER_TO_STRING(command_line_argument_2, Numeral_2)   ! Adjust to the left and trim trailing spaces from the string
-      CALL CHECK_VALIDITY(Numeral_2)   ! Check the input for invalid ASCII characters, return true or STOP the program
+      CALL CHECK_STRING_VALID(Numeral_2)   ! Check the input for invalid ASCII characters, return true or STOP the program
       
-      Number_1 = DECODER(Numeral_1)
-      Number_2 = DECODER(Numeral_2)
+      Number_1 = NUMERAL_TO_NUMBER(Numeral_1)
+      Number_2 = NUMERAL_TO_NUMBER(Numeral_2)
 
       NumberSum = Number_1 + Number_2
 
       IF (debugMode.eq..TRUE.) WRITE(*,*) Number_1, Number_2, NumberSum
 
-      NumeralSum = ROMAN(NumberSum)
+      NumeralSum = NUMBER_TO_NUMERAL(NumberSum)
 
       WRITE(*,*) NumeralSum
       
@@ -42,32 +42,34 @@
       
       
       !==================================================================================================================
-      ! This routine tests whether the input string contains any invalid ASCII characters
+      ! This routine tests whether the input string contains any invalid ASCII characters. If a null or invalid input is
+      ! detected, the routine STOPs the program.
 
-      SUBROUTINE CHECK_VALIDITY(StringValue)
+      SUBROUTINE CHECK_STRING_VALID(StringValue)
       USE PARAMETERS, only: ValidCharacters
       implicit none
       character(LEN=*), intent(in) :: StringValue
       logical                      :: isCharacterValid
       integer                      :: i, j
 
-      DO i = 1, LEN(StringValue)            ! for each character in the input string
-         DO j = 1, SIZE(ValidCharacters)    ! for each variable in ValidCharacters
-           IF (StringValue(i:i).eq.ValidCharacters(j)) THEN  ! when a match is detected, EXIT the loop and start the next one.
+      DO i = 1, LEN(StringValue)                             ! for each character in the input string
+         DO j = 1, SIZE(ValidCharacters)                     ! for each element in ValidCharacters
+           IF (StringValue(i:i).eq.ValidCharacters(j)) THEN  ! when a match is detected, skip this valid character and start the next loop.
               isCharacterValid = .TRUE. 
               EXIT
            ELSE 
               isCharacterValid = .FALSE.
            END IF
          END DO
+      
+         IF (isCharacterValid.eq..FALSE.) THEN
+           WRITE(*,*) 'ERROR: ',StringValue, ' contains invalid ASCII characters.'
+           STOP
+         END IF 
+      
       END DO
       
-      IF (isCharacterValid.eq..FALSE.) THEN
-        WRITE(*,*) 'ERROR: ',StringValue, ' contains invalid ASCII characters.'
-        STOP
-      END IF 
-
-      end SUBROUTINE CHECK_VALIDITY
+      end SUBROUTINE CHECK_STRING_VALID
       !==================================================================================================================
 
       !==================================================================================================================
@@ -93,7 +95,7 @@
       !SOURCE: https://rosettacode.org/wiki/Roman_numerals/Encode#Fortran
       ! This function takes the input of a number and translates it in a valid Roman Numeral
 
-      FUNCTION ROMAN(numberArabic) RESULT (numeral)
+      FUNCTION NUMBER_TO_NUMERAL(numberArabic) RESULT (numeral)
       USE PARAMETERS, only: RomanNumberValues, numeralCharacters
       implicit none
       integer(kind=2), intent(in) :: numberArabic
@@ -104,12 +106,18 @@
       numberDummy = numberArabic                        ! use numberDummy to store the changing number instead of numberArabic(intent(in))
       
       DO i = 1, SIZE(RomanNumberValues)                 ! for every distinct roman numeral number, descending order (high to low)
-        integerDivision = numberDummy / RomanNumberValues(i)                  ! divide number over largest integer, store result 
-        numeral = trim(numeral) // repeat(trim(numeralCharacters(i)), integerDivision)     ! collate numeral characters integerDivision times 
-        numberDummy = numberDummy - RomanNumberValues(i) * integerDivision    ! subtract the value integerDivision times, and update 
+        ! divide number over roman number value(i). As the values are integers, the remainder is ignored for this loop.
+        integerDivision = numberDummy / RomanNumberValues(i)                   
+        
+        ! collate the numeral character, integerDivision times 
+        numeral = trim(numeral) // repeat(trim(numeralCharacters(i)), integerDivision)     
+        
+        ! To account for the remainder from the integer division, subtract the value of the numeral character 
+        ! integerDivision times, and update 
+        numberDummy = numberDummy - RomanNumberValues(i) * integerDivision    
       END DO
  
-      END FUNCTION ROMAN
+      END FUNCTION NUMBER_TO_NUMERAL
       !==================================================================================================================
       
       
@@ -117,7 +125,7 @@
       !SOURCE: https://www.rosettacode.org/wiki/Roman_numerals/DECODE#Fortran
       !The original version cannot understand invalid numeral progression. F.e. it can be fooled by IVIVIVI, IXI-IVI, CMCMDIXVIXVID, etc
       !
-      FUNCTION DECODER(numeral) RESULT(numberArabic)
+      FUNCTION NUMERAL_TO_NUMBER(numeral) RESULT(numberArabic)
       implicit none
       character(LEN=*), intent(in)   :: numeral
       integer                        :: i, newValue, previousValue, numberArabic
@@ -143,7 +151,7 @@
           newValue = 1000                                                 ! update newValue 
           CALL COUNTING(13,counters)                                      ! increase M counter by 1
           IF (i.ne.1) THEN                                                ! IF the numeral is not the last one
-            IF (numeral(i-1:i-1).eq.'C'.or.numeral(i-1:i-1).eq.'c') THEN  ! IF the numeral before forms CAN form a double value numeral
+            IF (numeral(i-1:i-1).eq.'C'.or.numeral(i-1:i-1).eq.'c') THEN  ! IF the numeral before forms CAN form a double value numeral, e.g. CM
               newValue = 900                                              ! update newValue by overwriting the previous
               isDoubleValueNumeral = .TRUE.                               ! the two numerals of i and i-1 form a double value numeral
               CALL COUNTING(12,counters)                                  ! increase CM counter by 1
@@ -246,27 +254,34 @@
           newValue = 0
         END SELECT
         
-        IF (newValue >= previousValue) THEN                               ! update the number by the newValue if it's equal or larger than the previousValue.
+        
+        ! Update the number by newValue, if it's equal or larger than the previousValue.
+        IF (newValue >= previousValue) THEN                               
           numberArabic = numberArabic + newValue
           
-          IF (real(previousValue).eq.real(newValue)*4/9) THEN             ! IF the new value is the second double Value Numeral in succession, STOP the program. 
-            WRITE(*,*) 'INVALID NUMERAL SUCCESSION. Two double value numerals in succession'    
+          ! This traps successive double value numerals of the same order. (eg IXIV, XCXL, etc)
+          ! IF the new value is the second double Value Numeral in succession, STOP the program. 
+          IF (isDoubleValueNumeral.eq..TRUE..and.real(previousValue).eq.real(newValue)*4/9) THEN             
+            WRITE(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. Two double value numerals in succession'    
             STOP
           END IF
 
-          IF (isDoubleValueNumeral.eq..TRUE..and.real(newValue).lt.real(previousValue*2)) THEN  ! IF newValue is a double value numeral AND less than double of the previousValue...
-            WRITE(*,*) 'INVALID NUMERAL SUCCESSION. Double value numeral along with smaller numeral of the same order'
-            STOP  ! ...STOP the program. This traps double value numerals followed by smaller numerals, which their sum would be assigned a larger value numeral (eg IXV = 9+5 = 14 = XIV)
+          ! This traps double value numerals followed by smaller numerals, which their sum would be assigned a larger value numeral 
+          ! (eg IXV = 9+5 = 14 = XIV)
+          IF (isDoubleValueNumeral.eq..TRUE..and.real(newValue).lt.real(previousValue*2)) THEN  
+            WRITE(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. Double value numeral along with smaller numeral of the same order'
+            STOP  
           END IF
         
-        ELSE            ! if newValue < previousValue
-          WRITE(*,*) 'INVALID NUMERAL SUCCESSION' 
+        ELSE   ! IF newValue < previousValue
+          WRITE(*,*) 'ERROR: INVALID NUMERAL SUCCESSION' 
           STOP
         END IF
         
-        previousValue = newValue    ! update the previous value in preparation of next iteration
+        ! update the previous value in preparation of next iteration
+        previousValue = newValue                                          
       END DO
-      END FUNCTION DECODER
+      END FUNCTION NUMERAL_TO_NUMBER
       !==================================================================================================================
       
       !==================================================================================================================
