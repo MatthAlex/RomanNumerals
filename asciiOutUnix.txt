@@ -1,0 +1,255 @@
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR: command line argument empty.
+ ERROR: command line argument empty.
+ ERROR: command line argument empty.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR: command line argument empty.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR: command line argument empty.
+ ERROR: ! contains invalid ASCII characters.
+ ERROR: " contains invalid ASCII characters.
+ ERROR: # contains invalid ASCII characters.
+ ERROR: $ contains invalid ASCII characters.
+ ERROR: % contains invalid ASCII characters.
+ ERROR: & contains invalid ASCII characters.
+ ERROR: ' contains invalid ASCII characters.
+ ERROR: ( contains invalid ASCII characters.
+ ERROR: ) contains invalid ASCII characters.
+ ERROR: Documentation.pdf contains invalid ASCII characters.
+ ERROR: + contains invalid ASCII characters.
+ ERROR: , contains invalid ASCII characters.
+ ERROR: - contains invalid ASCII characters.
+ ERROR: . contains invalid ASCII characters.
+ ERROR: / contains invalid ASCII characters.
+ ERROR: 0 contains invalid ASCII characters.
+ ERROR: 1 contains invalid ASCII characters.
+ ERROR: 2 contains invalid ASCII characters.
+ ERROR: 3 contains invalid ASCII characters.
+ ERROR: 4 contains invalid ASCII characters.
+ ERROR: 5 contains invalid ASCII characters.
+ ERROR: 6 contains invalid ASCII characters.
+ ERROR: 7 contains invalid ASCII characters.
+ ERROR: 8 contains invalid ASCII characters.
+ ERROR: 9 contains invalid ASCII characters.
+ ERROR: : contains invalid ASCII characters.
+ ERROR: ; contains invalid ASCII characters.
+ ERROR: < contains invalid ASCII characters.
+ ERROR: = contains invalid ASCII characters.
+ ERROR: > contains invalid ASCII characters.
+ ERROR: ? contains invalid ASCII characters.
+ ERROR: @ contains invalid ASCII characters.
+ ERROR: A contains invalid ASCII characters.
+ ERROR: B contains invalid ASCII characters.
+ CI                              
+ DI                              
+ ERROR: E contains invalid ASCII characters.
+ ERROR: F contains invalid ASCII characters.
+ ERROR: G contains invalid ASCII characters.
+ ERROR: H contains invalid ASCII characters.
+ II                              
+ ERROR: J contains invalid ASCII characters.
+ ERROR: K contains invalid ASCII characters.
+ LI                              
+ MI                              
+ ERROR: N contains invalid ASCII characters.
+ ERROR: O contains invalid ASCII characters.
+ ERROR: P contains invalid ASCII characters.
+ ERROR: Q contains invalid ASCII characters.
+ ERROR: R contains invalid ASCII characters.
+ ERROR: S contains invalid ASCII characters.
+ ERROR: T contains invalid ASCII characters.
+ ERROR: U contains invalid ASCII characters.
+ VI                              
+ ERROR: W contains invalid ASCII characters.
+ XI                              
+ ERROR: Y contains invalid ASCII characters.
+ ERROR: Z contains invalid ASCII characters.
+ ERROR: [ contains invalid ASCII characters.
+ ERROR: \ contains invalid ASCII characters.
+ ERROR: ] contains invalid ASCII characters.
+ ERROR: ^ contains invalid ASCII characters.
+ ERROR: _ contains invalid ASCII characters.
+ ERROR: ` contains invalid ASCII characters.
+ ERROR: a contains invalid ASCII characters.
+ ERROR: b contains invalid ASCII characters.
+ CI                              
+ DI                              
+ ERROR: e contains invalid ASCII characters.
+ ERROR: f contains invalid ASCII characters.
+ ERROR: g contains invalid ASCII characters.
+ ERROR: h contains invalid ASCII characters.
+ II                              
+ ERROR: j contains invalid ASCII characters.
+ ERROR: k contains invalid ASCII characters.
+ LI                              
+ MI                              
+ ERROR: n contains invalid ASCII characters.
+ ERROR: o contains invalid ASCII characters.
+ ERROR: p contains invalid ASCII characters.
+ ERROR: q contains invalid ASCII characters.
+ ERROR: r contains invalid ASCII characters.
+ ERROR: s contains invalid ASCII characters.
+ ERROR: t contains invalid ASCII characters.
+ ERROR: u contains invalid ASCII characters.
+ VI                              
+ ERROR: w contains invalid ASCII characters.
+ XI                              
+ ERROR: y contains invalid ASCII characters.
+ ERROR: z contains invalid ASCII characters.
+ ERROR: { contains invalid ASCII characters.
+ ERROR: | contains invalid ASCII characters.
+ ERROR: } contains invalid ASCII characters.
+ ERROR: ~ contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR: Ä contains invalid ASCII characters.
+ ERROR: Å contains invalid ASCII characters.
+ ERROR: Ç contains invalid ASCII characters.
+ ERROR: É contains invalid ASCII characters.
+ ERROR: Ñ contains invalid ASCII characters.
+ ERROR: Ö contains invalid ASCII characters.
+ ERROR: Ü contains invalid ASCII characters.
+ ERROR: á contains invalid ASCII characters.
+ ERROR: à contains invalid ASCII characters.
+ ERROR: â contains invalid ASCII characters.
+ ERROR: ä contains invalid ASCII characters.
+ ERROR: ã contains invalid ASCII characters.
+ ERROR: å contains invalid ASCII characters.
+ ERROR: ç contains invalid ASCII characters.
+ ERROR: é contains invalid ASCII characters.
+ ERROR: è contains invalid ASCII characters.
+ ERROR: ê contains invalid ASCII characters.
+ ERROR: ë contains invalid ASCII characters.
+ ERROR: í contains invalid ASCII characters.
+ ERROR: ì contains invalid ASCII characters.
+ ERROR: î contains invalid ASCII characters.
+ ERROR: ï contains invalid ASCII characters.
+ ERROR: ñ contains invalid ASCII characters.
+ ERROR: ó contains invalid ASCII characters.
+ ERROR: ò contains invalid ASCII characters.
+ ERROR: ô contains invalid ASCII characters.
+ ERROR: ö contains invalid ASCII characters.
+ ERROR: õ contains invalid ASCII characters.
+ ERROR: ú contains invalid ASCII characters.
+ ERROR: ù contains invalid ASCII characters.
+ ERROR: û contains invalid ASCII characters.
+ ERROR: ü contains invalid ASCII characters.
+ ERROR: † contains invalid ASCII characters.
+ ERROR: ° contains invalid ASCII characters.
+ ERROR: ¢ contains invalid ASCII characters.
+ ERROR: £ contains invalid ASCII characters.
+ ERROR: § contains invalid ASCII characters.
+ ERROR: • contains invalid ASCII characters.
+ ERROR: ¶ contains invalid ASCII characters.
+ ERROR: ß contains invalid ASCII characters.
+ ERROR: ® contains invalid ASCII characters.
+ ERROR: © contains invalid ASCII characters.
+ ERROR: ™ contains invalid ASCII characters.
+ ERROR: ´ contains invalid ASCII characters.
+ ERROR: ¨ contains invalid ASCII characters.
+ ERROR: ≠ contains invalid ASCII characters.
+ ERROR: Æ contains invalid ASCII characters.
+ ERROR: Ø contains invalid ASCII characters.
+ ERROR: ∞ contains invalid ASCII characters.
+ ERROR: ± contains invalid ASCII characters.
+ ERROR: ≤ contains invalid ASCII characters.
+ ERROR: ≥ contains invalid ASCII characters.
+ ERROR: ¥ contains invalid ASCII characters.
+ ERROR: µ contains invalid ASCII characters.
+ ERROR: ∂ contains invalid ASCII characters.
+ ERROR: ∑ contains invalid ASCII characters.
+ ERROR: ∏ contains invalid ASCII characters.
+ ERROR: π contains invalid ASCII characters.
+ ERROR: ∫ contains invalid ASCII characters.
+ ERROR: ª contains invalid ASCII characters.
+ ERROR: º contains invalid ASCII characters.
+ ERROR: Ω contains invalid ASCII characters.
+ ERROR: æ contains invalid ASCII characters.
+ ERROR: ø contains invalid ASCII characters.
+ ERROR: ¿ contains invalid ASCII characters.
+ ERROR: ¡ contains invalid ASCII characters.
+ ERROR: ¬ contains invalid ASCII characters.
+ ERROR: √ contains invalid ASCII characters.
+ ERROR: ƒ contains invalid ASCII characters.
+ ERROR: ≈ contains invalid ASCII characters.
+ ERROR: ∆ contains invalid ASCII characters.
+ ERROR: « contains invalid ASCII characters.
+ ERROR: » contains invalid ASCII characters.
+ ERROR: … contains invalid ASCII characters.
+ ERROR:   contains invalid ASCII characters.
+ ERROR: À contains invalid ASCII characters.
+ ERROR: Ã contains invalid ASCII characters.
+ ERROR: Õ contains invalid ASCII characters.
+ ERROR: Œ contains invalid ASCII characters.
+ ERROR: œ contains invalid ASCII characters.
+ ERROR: – contains invalid ASCII characters.
+ ERROR: — contains invalid ASCII characters.
+ ERROR: “ contains invalid ASCII characters.
+ ERROR: ” contains invalid ASCII characters.
+ ERROR: ‘ contains invalid ASCII characters.
+ ERROR: ’ contains invalid ASCII characters.
+ ERROR: ÷ contains invalid ASCII characters.
+ ERROR: ◊ contains invalid ASCII characters.
+ ERROR: ÿ contains invalid ASCII characters.
+ ERROR: Ÿ contains invalid ASCII characters.
+ ERROR: ⁄ contains invalid ASCII characters.
+ ERROR: € contains invalid ASCII characters.
+ ERROR: ‹ contains invalid ASCII characters.
+ ERROR: › contains invalid ASCII characters.
+ ERROR: ﬁ contains invalid ASCII characters.
+ ERROR: ﬂ contains invalid ASCII characters.
+ ERROR: ‡ contains invalid ASCII characters.
+ ERROR: · contains invalid ASCII characters.
+ ERROR: ‚ contains invalid ASCII characters.
+ ERROR: „ contains invalid ASCII characters.
+ ERROR: ‰ contains invalid ASCII characters.
+ ERROR: Â contains invalid ASCII characters.
+ ERROR: Ê contains invalid ASCII characters.
+ ERROR: Á contains invalid ASCII characters.
+ ERROR: Ë contains invalid ASCII characters.
+ ERROR: È contains invalid ASCII characters.
+ ERROR: Í contains invalid ASCII characters.
+ ERROR: Î contains invalid ASCII characters.
+ ERROR: Ï contains invalid ASCII characters.
+ ERROR: Ì contains invalid ASCII characters.
+ ERROR: Ó contains invalid ASCII characters.
+ ERROR: Ô contains invalid ASCII characters.
+ ERROR:  contains invalid ASCII characters.
+ ERROR: Ò contains invalid ASCII characters.
+ ERROR: Ú contains invalid ASCII characters.
+ ERROR: Û contains invalid ASCII characters.
+ ERROR: Ù contains invalid ASCII characters.
+ ERROR: ı contains invalid ASCII characters.
+ ERROR: ˆ contains invalid ASCII characters.
+ ERROR: ˜ contains invalid ASCII characters.
+ ERROR: ¯ contains invalid ASCII characters.
+ ERROR: ˘ contains invalid ASCII characters.
+ ERROR: ˙ contains invalid ASCII characters.
+ ERROR: ˚ contains invalid ASCII characters.
+ ERROR: ¸ contains invalid ASCII characters.
+ ERROR: ˝ contains invalid ASCII characters.
+ ERROR: ˛ contains invalid ASCII characters.

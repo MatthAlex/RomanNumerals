@@ -2,7 +2,7 @@
       USE parameters, only: debugMode
       implicit none
       
-      integer(kind=2)               :: Number_1, Number_2, NumberSum
+      integer(kind=4)               :: Number_1, Number_2, NumberSum
       character(LEN=20)             :: command_line_argument_1, command_line_argument_2
       character(LEN=:), allocatable :: Numeral_1, Numeral_2, NumeralSum
 
@@ -29,7 +29,7 @@
 
       NumberSum = Number_1 + Number_2
 
-      IF (debugMode.eq..TRUE.) WRITE(*,*) Number_1, Number_2, NumberSum
+      IF (debugMode.eqv..TRUE.) WRITE(*,*) Number_1, Number_2, NumberSum
 
       NumeralSum = NUMBER_TO_NUMERAL(NumberSum)
 
@@ -62,7 +62,7 @@
            END IF
          END DO
       
-         IF (isCharacterValid.eq..FALSE.) THEN
+         IF (isCharacterValid.eqv..FALSE.) THEN
            WRITE(*,*) 'ERROR: ',StringValue, ' contains invalid ASCII characters.'
            STOP
          END IF 
@@ -78,7 +78,7 @@
 
       SUBROUTINE BUFFER_TO_STRING(buffer, StringValue)
       implicit none
-      character(LEN=20)            , intent(in)  :: buffer
+      character(LEN=*)            , intent(in)  :: buffer
       character(LEN=:), allocatable, intent(out) :: StringValue
 
       StringValue = trim(adjustL(buffer))
@@ -98,7 +98,7 @@
       FUNCTION NUMBER_TO_NUMERAL(numberArabic) RESULT (numeral)
       USE PARAMETERS, only: RomanNumberValues, numeralCharacters
       implicit none
-      integer(kind=2), intent(in) :: numberArabic
+      integer(kind=4), intent(in) :: numberArabic
       integer                     :: i, numberDummy, integerDivision
       character(32)               :: numeral
       
@@ -129,7 +129,7 @@
       implicit none
       character(LEN=*), intent(in)   :: numeral
       integer                        :: i, newValue, previousValue, numberArabic
-      integer(kind=2), dimension(13) :: counters
+      integer(kind=4), dimension(13) :: counters
       logical                        :: isDoubleValueNumeral
  
       !----- Initialisation --------------------------------
@@ -141,7 +141,7 @@
       !-----------------------------------------------------
 
       DO i = LEN(numeral), 1, -1                                          ! Start from the end and iterate the opposite way
-        IF (isDoubleValueNumeral.eq..TRUE.) THEN                          ! IF the previous iteration numeral is part of double value numeral
+        IF (isDoubleValueNumeral.eqv..TRUE.) THEN                          ! IF the previous iteration numeral is part of double value numeral
           isDoubleValueNumeral = .FALSE.                                  ! RESET the trigger AND
           CYCLE                                                           ! skip the current loop
         END IF
@@ -261,14 +261,14 @@
           
           ! This traps successive double value numerals of the same order. (eg IXIV, XCXL, etc)
           ! IF the new value is the second double Value Numeral in succession, STOP the program. 
-          IF (isDoubleValueNumeral.eq..TRUE..and.real(previousValue).eq.real(newValue)*4/9) THEN             
+          IF (real(previousValue).eq.real(newValue)*4/9.and.isDoubleValueNumeral.eqv..TRUE.) THEN             
             WRITE(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. Two double value numerals in succession'    
             STOP
           END IF
 
           ! This traps double value numerals followed by smaller numerals, which their sum would be assigned a larger value numeral 
           ! (eg IXV = 9+5 = 14 = XIV)
-          IF (isDoubleValueNumeral.eq..TRUE..and.real(newValue).lt.real(previousValue*2)) THEN  
+          IF (real(newValue).lt.real(previousValue*2).and.isDoubleValueNumeral.eqv..TRUE.) THEN  
             WRITE(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. Double value numeral along with smaller numeral of the same order'
             STOP  
           END IF
@@ -291,8 +291,8 @@
       SUBROUTINE COUNTING(order,counters)
       USE PARAMETERS, only: validCount            ! total valid amount of counts for each numeral
       implicit none
-      integer(kind=2), intent(in) :: order       ! the order is given by the numeral succession: I, IV, V, IX, X, .. etc
-      integer(kind=2), dimension(13), intent(inout) :: counters    ! how many counts of each numeral are triggered
+      integer(kind=4), intent(in) :: order       ! the order is given by the numeral succession: I, IV, V, IX, X, .. etc
+      integer(kind=4), dimension(13), intent(inout) :: counters    ! how many counts of each numeral are triggered
 
       counters(order) = counters(order) + 1     ! iterate for every call
       IF (counters(order).gt.validCount(order)) THEN  ! if more counts than permitted are found, abort the program with an error.
