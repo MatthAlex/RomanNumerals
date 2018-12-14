@@ -1,4 +1,4 @@
-      MODULE PARAMETERS
+      module parameters
       implicit none
       
       character(LEN=1) :: ValidCharacters(14) = (/ 'I','i', 'V','v', 'X','x', 'L','l', 'C','c', 'D','d', 'M','m' /) ! populate character array of 14 1-length characters, upper and lower
@@ -9,4 +9,4 @@
 
       logical         :: debugMode = .FALSE.
 
-      END MODULE
+      end module parameters
