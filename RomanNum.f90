@@ -7,9 +7,9 @@
 	use routines
 	implicit none
 	
-	integer							     		:: Number_1, Number_2, Number_Sum, Number_Check_Sum, argument_count
-	character(LEN=20)		 	 		:: command_line_argument_1, command_line_argument_2
-	character(LEN=:), allocatable 	:: Numeral_1, Numeral_2, Numeral_Sum
+	integer	:: Number_1, Number_2, Number_Sum, Number_Check_Sum, argument_count
+	character(LEN=20)	:: command_line_argument_1, command_line_argument_2
+	character(LEN=:), allocatable	:: Numeral_1, Numeral_2, Numeral_Sum
 
 	! Check argument count and abort if different than 2
 	argument_count = COMMAND_ARGUMENT_COUNT()
