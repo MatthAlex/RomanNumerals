@@ -7,12 +7,12 @@
 	use routines
 	implicit none
 	
-	integer(kind=4)			     		:: Number_1, Number_2, Number_Sum, Number_Check_Sum
+	integer							     		:: Number_1, Number_2, Number_Sum, Number_Check_Sum, argument_count
 	character(LEN=20)		 	 		:: command_line_argument_1, command_line_argument_2
 	character(LEN=:), allocatable 	:: Numeral_1, Numeral_2, Numeral_Sum
 
 	! Check argument count and abort if different than 2
-	argument_count = GET_ARGUMENT_COUNT()
+	argument_count = COMMAND_ARGUMENT_COUNT()
 	if (argument_count .ne. 2) then
 		write(*,*) 'ERROR: Only two command line arguments allowed.'
 		stop
@@ -40,7 +40,9 @@
 	if (debugMode) write(*,*) Number_1, Number_2, Number_Sum
 
 	! Translate numeral to number
-	Numeral_Sum = number_to_numeral(Number_Sum)
+	!Numeral_Sum = number_to_numeral(Number_Sum)
+	call number_to_numeral(Number_Sum, Numeral_Sum)
+	if (debugMode) write(*,*) 'Numeral_Sum=',Number_Sum, ' and LEN=',LEN(Numeral_Sum)
 
 	! Check that the conversion holds true
 	Number_Check_Sum = numeral_to_number(Numeral_Sum)
