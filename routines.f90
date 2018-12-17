@@ -12,12 +12,14 @@
 	logical			:: isCharacterValid
 	integer			:: i, j
 
-	do i = 1, LEN(StringValue)				 ! for each character in the input string
-		do j = 1, SIZE(ValidCharacters)			 ! for each element in ValidCharacters
-			if (StringValue(i:i).eq.ValidCharacters(j)) then  ! when a match is detected, skip this valid character and start the next loop.
-				isCharacterValid = .TRUE. 
+	! scan each character in the input string and compare to the ValidCharacters elements
+	! when a match is detected, exit and start the next loop.
+	do i = 1, LEN(StringValue)
+		do j = 1, SIZE(ValidCharacters)
+			if (StringValue(i:i).eq.ValidCharacters(j)) then
+				isCharacterValid = .TRUE.
 				exit
-			else 
+			else
 				isCharacterValid = .FALSE.
 			end if
 		end do
@@ -32,7 +34,7 @@
 	!==================================================================================================================
 
     !==================================================================================================================
-    ! This routine adjusts the string to the left, removes any trailing spaces, and allocates the new length.
+    ! This routine turns lowercase to uppercase, adjusts the string to the left, removes any trailing spaces, and allocates the new length.
     ! The resulting string cannot be empty.
 
     subroutine buffer_to_string(buffer, StringValue)
@@ -58,23 +60,24 @@
 	subroutine number_to_numeral(numberArabic, numeral)
 	use parameters, only: RomanNumberValues, numeralCharacters
 	implicit none
-	integer(kind=4), intent(in) 			:: numberArabic
-	integer			 					:: i, numberDummy, integerDivision
+	integer, value 			:: numberArabic	! dummy value initialized to numberArabic
+	integer			 					:: i, integerDivision
 	character(LEN=:) , allocatable, intent(out)		:: numeral
 	
-	numeral = ''						! initialise the string to null
-	numberDummy = numberArabic				! use numberDummy to store the changing number instead of numberArabic(intent(in))
+	numeral = ''
+		
+	! for every distinct roman numeral number, descending order (high to low)
+	do i = SIZE(RomanNumberValues), 1, -1
 	
-	do i = 1, SIZE(RomanNumberValues)		 ! for every distinct roman numeral number, descending order (high to low)
 	! divide number over roman number value(i). As the values are integers, the remainder is ignored for this loop.
-		integerDivision = numberDummy / RomanNumberValues(i)			 
+		integerDivision = numberArabic / RomanNumberValues(i)			 
 	
 	! collate the numeral character, integerDivision times 
 		numeral = trim(numeral) // repeat(trim(numeralCharacters(i)), integerDivision)     
 	
 	! To account for the remainder from the integer division, subtract the value of the numeral character 
 	! integerDivision times, and update 
-		numberDummy = numberDummy - RomanNumberValues(i) * integerDivision    
+		numberArabic = numberArabic - RomanNumberValues(i) * integerDivision    
 	end do
  
 	end subroutine number_to_numeral
@@ -86,11 +89,11 @@
 	!The original version cannot understand invalid numeral progression. F.e. it can be fooled by IVIVIVI, IXI-IVI, CMCMDIXVIXVID, etc
 	
 	function numeral_to_number(numeral) result(numberArabic)
-	use parameters, only: debugMode
+	use parameters, only: debugMode, RomanNumberValues, NumeralCharacters
 	implicit none
 	character(LEN=*), intent(in)   :: numeral
 	integer				:: i, newValue, previousValue, numberArabic
-	integer(kind=4), dimension(13) :: counters
+	integer, dimension(13) :: counters
 	logical				:: isDoubleValueNumeral
  
 	!----- Initialisation --------------------------------
@@ -103,37 +106,40 @@
 
 	if (debugMode) write(*,*) 'Numeral_to_number initial numeral =', numeral, ', and numeral length=', LEN(numeral)
 	
-	do i = LEN(numeral), 1, -1							! Start from the end and iterate the opposite way
-		if (isDoubleValueNumeral.eqv..TRUE.) then				! if the previous iteration numeral is part of double value numeral
-			isDoubleValueNumeral = .FALSE.					! RESET the trigger AND
-			cycle									 ! skip the current loop
+	! The loop starts from the end of the numeral and iterates on the opposite way.
+	do i = LEN(numeral), 1, -1
+	
+	! When a double value numeral has already been detected, skip the current loop and reset the flag
+		if (isDoubleValueNumeral.eqv..TRUE.) then
+			isDoubleValueNumeral = .FALSE.
+			cycle
 		end if
 	
-		select case(numeral(i:i)) 
-		CASE ('M','m')								! if the numeral is M
-			newValue = 1000								 ! update newValue 
-			call counting(13,counters)						! increase M counter by 1
-			if (i.ne.1) then								! if the numeral is not the last one
-				if (numeral(i-1:i-1).eq.'C'.or.numeral(i-1:i-1).eq.'c') then  ! if the numeral before CAN form a double value numeral, e.g. CM
-					newValue = 900							! update newValue by overwriting the previous
-					isDoubleValueNumeral = .TRUE.					 ! the two numerals of i and i-1 form a double value numeral
-					call counting(12,counters)					! increase CM counter by 1
-					if (counters(9).ge.counters(12)) then			 ! if the i-1 component of the numeral coexists with the individual numeral character
+		select case(numeral(i:i))
+		CASE (NumeralCharacters(13))
+			newValue = RomanNumberValues(13)							! M = 1000
+			call counting(13,counters)
+			if (i.ne.1) then
+				if (numeral(i-1:i-1).eq.NumeralCharacters(9)) then	! if C
+					newValue = RomanNumberValues(12)					! CM = 900
+					isDoubleValueNumeral = .TRUE.
+					call counting(12,counters)
+					if (counters(9).ge.counters(12)) then
 						write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. CM and C found together.'
-						stop									! stop the program 
+						stop
 					end if
-				counters(13) = counters(13) - 1				 ! if the numeral was a double value numeral, decrease M counter by 1
+				counters(13) = counters(13) - 1
 				end if
 			end if
 		
-		CASE ('D','d')
-			newValue = 500
-			call counting(11,counters)						! increase counter of D
+		CASE (NumeralCharacters(11))
+			newValue = RomanNumberValues(11)							! D = 500
+			call counting(11,counters)
 			if (i.ne.1) then
-				if (numeral(i-1:i-1).eq.'C'.or.numeral(i-1:i-1).eq.'c') then  ! distinguish CD as 400
-					newValue = 400
+				if (numeral(i-1:i-1).eq.NumeralCharacters(9)) then	! if C
+					newValue = RomanNumberValues(10)					! CD = 400
 					isDoubleValueNumeral = .TRUE.
-					call counting(10,counters)					! increase counter of CD
+					call counting(10,counters)
 					if (counters(9).ge.counters(10)) then
 						write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. CD and C found together.'
 						stop
@@ -142,14 +148,14 @@
 				end if
 			end if
 		
-		CASE ('C','c')
-			newValue = 100
-			call counting(9,counters)						 ! increase counter of C
+		CASE (NumeralCharacters(9))
+			newValue = RomanNumberValues(9)							! C = 100
+			call counting(9,counters)
 			if (i.ne.1) then
-				if (numeral(i-1:i-1).eq.'X'.or.numeral(i-1:i-1).eq.'x') then  ! distinguish XC as 90
-					newValue = 90
+				if (numeral(i-1:i-1).eq.NumeralCharacters(5)) then	! if X
+					newValue = RomanNumberValues(8)					! XC = 90
 					isDoubleValueNumeral = .TRUE.
-					call counting(8,counters)					 ! increase counter of XC
+					call counting(8,counters)
 					if (counters(5).ge.counters(8)) then
 						write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. XC and X found together.'
 						stop
@@ -158,14 +164,14 @@
 				end if
 			end if
 		
-		CASE ('L','l')
-			newValue = 50
-			call counting(7,counters)						 ! increase counter of L
+		CASE (NumeralCharacters(7))
+			newValue = RomanNumberValues(7)							! L = 50
+			call counting(7,counters)
 			if (i.ne.1) then
-				if (numeral(i-1:i-1).eq.'X'.or.numeral(i-1:i-1).eq.'x') then  ! distinguish XL as 40
-					newValue = 40 
+				if (numeral(i-1:i-1).eq.NumeralCharacters(5)) then	! if X
+					newValue = RomanNumberValues(6)					! XL = 40
 					isDoubleValueNumeral = .TRUE.
-					call counting(6,counters)					 ! increase counter of XL
+					call counting(6,counters)
 					if (counters(5).ge.counters(6)) then
 						write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. XL and X found together.'
 						stop
@@ -174,14 +180,14 @@
 				end if
 			end if
 		
-		CASE ('X','x')
-			newValue = 10
-			call counting(5,counters)						 ! increase counter of X
+		CASE (NumeralCharacters(5))
+			newValue = RomanNumberValues(5)							! X = 10
+			call counting(5,counters)
 			if (i.ne.1) then
-				if (numeral(i-1:i-1).eq.'I'.or.numeral(i-1:i-1).eq.'i') then  ! distinguish IX as 9
-				newValue = 9
+				if (numeral(i-1:i-1).eq.NumeralCharacters(1)) then	! if I
+				newValue = RomanNumberValues(4)						! IX = 9
 				isDoubleValueNumeral = .TRUE.
-				call counting(4,counters)					 ! increase counter of IX
+				call counting(4,counters)
 					if (counters(1).ge.counters(4)) then
 						write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. I and IX found together.'
 						stop
@@ -190,14 +196,14 @@
 				end if
 			end if
 		
-		CASE ('V','v')
-			newValue = 5
-			call counting(3,counters)						 ! increase counter of V(lad)
+		CASE (NumeralCharacters(3))
+			newValue = RomanNumberValues(3)							! V = 5
+			call counting(3,counters)
 			if (i.ne.1) then
-				if (numeral(i-1:i-1).eq.'I'.or.numeral(i-1:i-1).eq.'i') then  ! distinguish IV as 4
-				newValue = 4
+				if (numeral(i-1:i-1).eq.NumeralCharacters(1)) then	! if I
+				newValue = RomanNumberValues(2)						! IV = 4
 				isDoubleValueNumeral = .TRUE.
-				call counting(2, counters)					! increase counter of IV
+				call counting(2, counters)
 					if (counters(1).ge.counters(2)) then
 						write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. I and IV found together.'
 						stop
@@ -206,11 +212,11 @@
 				end if
 			end if
 		
-		CASE ('I','i')
-			newValue = 1
-			call counting(1,counters)						 ! increase counter of I
+		CASE (NumeralCharacters(1))
+			newValue = RomanNumberValues(1)			! I = 1
+			call counting(1,counters)
 
-		CASE default									! this will not detect invalid characters
+		CASE default
 			write(*,*) 'ERROR: SELECT CASE selector wrong value...'
 			if (debugMode) write(*,*) 'CASE default selector value =', numeral(i:i), 'for i =', i
 		newValue = 0
@@ -252,15 +258,15 @@
 	! count is larger than the valid count, the program stops.
 	
 	subroutine counting(order,counters)
-	use parameters, only: validCount		! total valid amount of counts for each numeral
+	use parameters, only: validCount
 	implicit none
-	integer(kind=4), intent(in) :: order	 ! the order is given by the numeral succession: I, IV, V, IX, X, .. etc
-	integer(kind=4), dimension(13), intent(inout) :: counters    ! how many counts of each numeral are triggered
+	integer, intent(in) :: order
+	integer, dimension(13), intent(inout) :: counters
 
-	counters(order) = counters(order) + 1     ! iterate for every call
-	if (counters(order).gt.validCount(order)) then  ! if more counts than permitted are found, abort the program with an error.
-	write(*,*) 'ERROR: INVALID NUMERAL COUNT. MULTIPLES FOUND.'
-	stop
+	counters(order) = counters(order) + 1
+	if (counters(order).gt.validCount(order)) then
+		write(*,*) 'ERROR: INVALID NUMERAL COUNT. MULTIPLES FOUND.'
+		stop
 	end if
 	
 	end subroutine counting
@@ -281,7 +287,7 @@
     do i = 1, len(strIn)
 		j = iachar(strIn(i:i))
 		if (j>= iachar("a") .and. j<=iachar("z") ) then
-			strOut(i:i) = achar(iachar(strIn(i:i))-32)
+			strOut(i:i) = achar( iachar( strIn(i:i) ) - 32 )
 		else
 			strOut(i:i) = strIn(i:i)
 		end if
