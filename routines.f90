@@ -32,6 +32,27 @@
 	
 	end subroutine check_string_valid
 	!==================================================================================================================
+	
+	
+	
+	!==================================================================================================================
+	! This routine tests whether the input string contains any invalid ASCII characters. If a null or invalid input is
+	! detected, the routine stops the program.
+	
+	subroutine verify_string(StringValue)
+	implicit none
+	character(LEN=*), intent(in) :: StringValue
+	logical			:: isCharacterValid
+	integer 		:: Sresult
+
+	Sresult = verify(StringValue, "IVXLCDM",isCharacterValid)
+	if (Sresult.ne.0) then
+		write(*,*) 'ERROR: ',StringValue, ' contains invalid ASCII characters.'
+		stop
+	end if 
+		
+	end subroutine verify_string
+	!==================================================================================================================
 
     !==================================================================================================================
     ! This routine turns lowercase to uppercase, adjusts the string to the left, removes any trailing spaces, and allocates the new length.
