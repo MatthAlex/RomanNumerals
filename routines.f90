@@ -24,7 +24,7 @@
 			end if
 		end do
 	
-		if (isCharacterValid.eqv..FALSE.) then
+		if (.NOT.isCharacterValid) then
 			write(*,*) 'ERROR: ',StringValue, ' contains invalid ASCII characters.'
 			stop
 		end if 
@@ -65,12 +65,12 @@
     character(LEN=:), allocatable, intent(out) :: StringValue
 
     StringValue = to_upper( trim(adjustL(buffer)) )
-	
+
     if (StringValue.eq.'') then
 		write(*,*) 'ERROR: command line argument empty.'
 		stop
     end if
-	
+		
     end subroutine buffer_to_string
     !==================================================================================================================
 	
@@ -131,7 +131,7 @@
 	do i = LEN(numeral), 1, -1
 	
 	! When a double value numeral has already been detected, skip the current loop and reset the flag
-		if (isDoubleValueNumeral.eqv..TRUE.) then
+		if (isDoubleValueNumeral) then
 			isDoubleValueNumeral = .FALSE.
 			cycle
 		end if
@@ -251,14 +251,14 @@
 	
 	! This traps successive double value numerals of the same order. (eg IXIV, XCXL, etc)
 	! if the new value is the second double Value Numeral in succession, stop the program.
-			if (real(previousValue).eq.real(newValue)*4/9.and.isDoubleValueNumeral.eqv..TRUE.) then
+			if (real(previousValue).eq.real(newValue)*(4./9.).and.isDoubleValueNumeral) then
 				write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. Two double value numerals in succession'
 				stop
 			end if
 
 	! This traps double value numerals followed by smaller numerals, which their sum would be assigned a larger value numeral
 	! (eg IXV = 9+5 = 14 = XIV)
-			if (real(newValue).lt.real(previousValue*2).and.isDoubleValueNumeral.eqv..TRUE.) then
+			if (real(newValue).lt.real(previousValue*2).and.isDoubleValueNumeral) then
 				write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. Double value numeral along with smaller numeral of the same order'
 				stop
 			end if
