@@ -1,16 +1,19 @@
+	!> Contains all routines used in the main program.
 	module routines
 	implicit none
 	contains
+	
+	
 	!==================================================================================================================
-	! This routine tests whether the input string contains any invalid ASCII characters. If a null or invalid input is
-	! detected, the routine stops the program.
+	!> This routine tests whether the input string contains any invalid ASCII characters. If a null or invalid input is
+	!> detected, the routine stops the program.
 	
 	subroutine check_string_valid(StringValue)
 	use parameters, only: ValidCharacters
 	implicit none
-	character(LEN=*), intent(in) :: StringValue
-	logical			:: isCharacterValid
-	integer			:: i, j
+	character(LEN=*), intent(in) :: StringValue	!!
+	logical			:: isCharacterValid	!! Logical flag to check whether a character is valid
+	integer			:: i, j !!
 
 	! scan each character in the input string and compare to the ValidCharacters elements
 	! when a match is detected, exit and start the next loop.
@@ -36,14 +39,14 @@
 	
 	
 	!==================================================================================================================
-	! This routine tests whether the input string contains any invalid ASCII characters. If a null or invalid input is
-	! detected, the routine stops the program.
+	!> This routine tests whether the input string contains any invalid ASCII characters. If a null or invalid input is
+	!> detected, the routine stops the program.
 	
 	subroutine verify_string(StringValue)
 	implicit none
-	character(LEN=*), intent(in) :: StringValue
-	logical			:: isCharacterValid
-	integer 		:: Sresult
+	character(LEN=*), intent(in) :: StringValue	!!
+	logical			:: isCharacterValid	!!
+	integer 		:: Sresult	!!
 
 	Sresult = verify(StringValue, "IVXLCDM",isCharacterValid)
 	if (Sresult.ne.0) then
@@ -55,14 +58,14 @@
 	!==================================================================================================================
 
     !==================================================================================================================
-    ! This routine turns lowercase to uppercase, adjusts the string to the left, removes any trailing spaces, and allocates the new length.
-    ! The resulting string cannot be empty.
+    !> This routine turns lowerc: ase to uppercase, adjusts the string to the left, removes any trailing spaces, and allocates the new length.
+    !> The resulting string cannot be empty.
 
     subroutine buffer_to_string(buffer, StringValue)
 	use parameters, only: debugMode
     implicit none
-    character(LEN=*)   			 , intent(in)  :: buffer
-    character(LEN=:), allocatable, intent(out) :: StringValue
+    character(LEN=*), intent(in)  :: buffer	!!
+    character(LEN=:), allocatable, intent(out) :: StringValue	!!
 
     StringValue = to_upper( trim(adjustL(buffer)) )
 
@@ -75,15 +78,15 @@
     !==================================================================================================================
 	
     !==================================================================================================================
-    !SOURCE: https://rosettacode.org/wiki/Roman_numerals/Encode#Fortran
-    ! This function takes the input of a number and translates it in a valid Roman Numeral
-
+    !> source: rosettacode.org/wiki/Roman_numerals/Encode#Fortran.
+    !> This routine takes the input of a number and translates it in a valid Roman Numeral.
+	
 	subroutine number_to_numeral(numberArabic, numeral)
 	use parameters, only: RomanNumberValues, numeralCharacters
 	implicit none
-	integer, value 			:: numberArabic	! dummy value initialized to numberArabic
-	integer			 					:: i, integerDivision
-	character(LEN=:) , allocatable, intent(out)		:: numeral
+	integer, value :: numberArabic	!! dummy value initialized to numberArabic
+	integer	:: i, integerDivision	!!
+	character(LEN=:) , allocatable, intent(out) :: numeral	!!
 	
 	numeral = ''
 		
@@ -106,16 +109,16 @@
 	
 	
 	!==================================================================================================================
-	!SOURCE: https://www.rosettacode.org/wiki/Roman_numerals/DECODE#Fortran
-	!The original version cannot understand invalid numeral progression. F.e. it can be fooled by IVIVIVI, IXI-IVI, CMCMDIXVIXVID, etc
+	!> source: rosettacode.org/wiki/Roman_numerals/DECODE#Fortran. This function translates a Roman numeral character into its equivalent numerical value. 
+	!> The original version cannot understand invalid numeral progression. F.e. it can be fooled by IVIVIVI, IXI-IVI, CMCMDIXVIXVID, etc
 	
 	function numeral_to_number(numeral) result(numberArabic)
 	use parameters, only: debugMode, RomanNumberValues, NumeralCharacters
 	implicit none
-	character(LEN=*), intent(in)   :: numeral
-	integer				:: i, newValue, previousValue, numberArabic
-	integer, dimension(13) :: counters
-	logical				:: isDoubleValueNumeral
+	character(LEN=*), intent(in)   :: numeral	!!
+	integer	:: i, newValue, previousValue, numberArabic	!!
+	integer, dimension(13) :: counters	!!
+	logical	:: isDoubleValueNumeral	!!
  
 	!----- Initialisation --------------------------------
 	numberArabic = 0
@@ -275,14 +278,14 @@
 	!==================================================================================================================
 	
 	!==================================================================================================================
-	! This routine iterates the counters for each roman numeral, and compares the amount to the valid count. If the 
-	! count is larger than the valid count, the program stops.
+	!> This routine iterates the counters for each roman numeral, and compares the amount to the valid count. If the 
+	!> count is larger than the valid count, the program stops.
 	
 	subroutine counting(order,counters)
 	use parameters, only: validCount
 	implicit none
-	integer, intent(in) :: order
-	integer, dimension(13), intent(inout) :: counters
+	integer, intent(in) :: order	!!
+	integer, dimension(13), intent(inout) :: counters	!!
 
 	counters(order) = counters(order) + 1
 	if (counters(order).gt.validCount(order)) then
@@ -296,13 +299,14 @@
 	
 	
 	!==================================================================================================================  
+	!> Adapted from http://www.star.le.ac.uk/~cgp/fortran.html (25 May 2012)
+	!> Original author: Clive Page
+    
 	function to_upper(strIn) result(strOut)
-	! Adapted from http://www.star.le.ac.uk/~cgp/fortran.html (25 May 2012)
-	! Original author: Clive Page
-    implicit none
+	implicit none
 
-    character(len=*), intent(in) :: strIn
-    character(len=len(strIn)) :: strOut
+    character(len=*), intent(in) :: strIn	!!
+    character(len=len(strIn)) :: strOut	!!
     integer :: i,j
 
     do i = 1, len(strIn)

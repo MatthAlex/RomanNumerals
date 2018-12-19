@@ -1,0 +1,11 @@
+project: RSE homework 
+title: RSE task
+author: M.Alexandrakis - ITS Research
+website: https://blog.hpc.qmul.ac.uk
+twitter: https://twitter.com/QMUL_RIT
+github: https://github.research.its.qmul.ac.uk/itsrblog/rse-using-ford
+summary: A program that takes input of two Roman Numerals from the command line, adds them and outputs them as the correct form of the equivalent Roman Numeral.
+src_dir: src/
+graph: true
+warn: true
+
