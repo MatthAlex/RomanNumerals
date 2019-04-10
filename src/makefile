@@ -4,21 +4,26 @@ SHELL = /bin/sh
 
 # Define variables
 objects = parameters.o routines.o
-FC = gfortran-8	
+FC = gfortran
 # ifort, mpif90, nagfor, etc..
-genFlags   = -fbacktrace -Ofast
-debugFlags = # -Wall -fbounds-check
+FCFLAGS   = -fbacktrace -Ofast
+FCDEBUG = -fbacktrace -Wall -fbounds-check
 
 
 # Makefile
-RomanNum: $(objects)
-	$(FC) -o RomanNum RomanNum.f90 $(genFlags) $(debugFlags) $(objects)
+build: $(objects)
+	$(FC) -o RomanNum RomanNum.f90 $(FCFLAGS) $(objects)
 #routines.o: routines.f90
 #	$(FC) -c routines.f90
 #parameters.o: parameters.f90
 #	$(FC) -c parameters.f90
 %.o: %.f90
-	$(FC) -c $(debugFlags) $(genFlags) $<
+	$(FC) -c $(FCFLAGS) $<
+
+debug: $(objects)
+	$(FC) -o RomanNum RomanNum.f90 $(FCDEBUG) $(objects)
+%.o: %.f90
+	$(FC) -c $(FCDEBUG) $<
 	
 # Dependencies
 routines.o: parameters.o

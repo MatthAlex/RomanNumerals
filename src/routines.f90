@@ -49,7 +49,7 @@
    subroutine verify_string(StringValue, error)
    implicit none
    character(LEN=*), intent(in) :: StringValue
-   logical :: isCharacterValid
+   logical :: isCharacterValid = .TRUE.
    integer, intent(out) :: error
    integer :: Sresult
 
