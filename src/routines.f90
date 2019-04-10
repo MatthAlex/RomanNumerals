@@ -155,7 +155,7 @@
       select case(numeral(i:i))
       CASE (NumeralCharacters(13))
          newValue = RomanNumberValues(13)                     ! M = 1000
-         
+
          !call counting(13,counters)
          counters(13) = counters(13) + 1
          if (counters(13).gt.validCount(13)) then
@@ -168,7 +168,7 @@
             if (numeral(i-1:i-1).eq.NumeralCharacters(9)) then   ! if C
                newValue = RomanNumberValues(12)               ! CM = 900
                isDoubleValueNumeral = .TRUE.
-               
+
                !call counting(12,counters)
                counters(12) = counters(12) + 1
                if (counters(12).gt.validCount(12)) then
@@ -189,7 +189,7 @@
 
       CASE (NumeralCharacters(11))
          newValue = RomanNumberValues(11)                     ! D = 500
-         
+
          !call counting(11,counters)
          counters(11) = counters(11) + 1
          if (counters(11).gt.validCount(11)) then
@@ -202,7 +202,7 @@
             if (numeral(i-1:i-1).eq.NumeralCharacters(9)) then   ! if C
                newValue = RomanNumberValues(10)               ! CD = 400
                isDoubleValueNumeral = .TRUE.
-         
+
                !call counting(10,counters)
                counters(10) = counters(10) + 1
                if (counters(10).gt.validCount(10)) then
@@ -210,7 +210,7 @@
                   numberArabic = -1
                   return
                end if
-         
+
                if (counters(9).ge.counters(10)) then
                   write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. CD and C found together.'
                   numberArabic = -1
@@ -223,7 +223,7 @@
 
       CASE (NumeralCharacters(9))
          newValue = RomanNumberValues(9)                     ! C = 100
-         
+
          !call counting(9,counters)
          counters(9) = counters(9) + 1
          if (counters(9).gt.validCount(9)) then
@@ -231,12 +231,12 @@
             numberArabic = -1
             return
          end if
-         
+
          if (i.ne.1) then
             if (numeral(i-1:i-1).eq.NumeralCharacters(5)) then   ! if X
                newValue = RomanNumberValues(8)               ! XC = 90
                isDoubleValueNumeral = .TRUE.
-               
+
                !call counting(8,counters)
                counters(8) = counters(8) + 1
                if (counters(8).gt.validCount(8)) then
@@ -244,7 +244,7 @@
                   numberArabic = -1
                   return
                end if
-               
+
                if (counters(5).ge.counters(8)) then
                   write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. XC and X found together.'
                   numberArabic = -1
@@ -257,7 +257,7 @@
 
       CASE (NumeralCharacters(7))
          newValue = RomanNumberValues(7)                     ! L = 50
-         
+
          !call counting(7,counters)
          counters(7) = counters(7) + 1
          if (counters(7).gt.validCount(7)) then
@@ -270,7 +270,7 @@
             if (numeral(i-1:i-1).eq.NumeralCharacters(5)) then   ! if X
                newValue = RomanNumberValues(6)               ! XL = 40
                isDoubleValueNumeral = .TRUE.
-               
+
                !call counting(6,counters)
                counters(6) = counters(6) + 1
                if (counters(6).gt.validCount(6)) then
@@ -291,7 +291,7 @@
 
       CASE (NumeralCharacters(5))
          newValue = RomanNumberValues(5)                     ! X = 10
-         
+
          !call counting(5,counters)
          counters(5) = counters(5) + 1
          if (counters(5).gt.validCount(5)) then
@@ -304,7 +304,7 @@
             if (numeral(i-1:i-1).eq.NumeralCharacters(1)) then   ! if I
                newValue = RomanNumberValues(4)                  ! IX = 9
                isDoubleValueNumeral = .TRUE.
-               
+
                !call counting(4,counters)
                counters(4) = counters(4) + 1
                if (counters(4).gt.validCount(4)) then
@@ -325,7 +325,7 @@
 
       CASE (NumeralCharacters(3))
          newValue = RomanNumberValues(3)                     ! V = 5
-         
+
          !call counting(3,counters)
          counters(3) = counters(3) + 1
          if (counters(3).gt.validCount(3)) then
@@ -338,7 +338,7 @@
             if (numeral(i-1:i-1).eq.NumeralCharacters(1)) then   ! if I
                newValue = RomanNumberValues(2)                  ! IV = 4
                isDoubleValueNumeral = .TRUE.
-               
+
                !call counting(2, counters)
                counters(2) = counters(2) + 1
                if (counters(2).gt.validCount(2)) then
@@ -346,7 +346,7 @@
                   numberArabic = -1
                   return
                end if
-               
+
                if (counters(1).ge.counters(2)) then
                   write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. I and IV found together.'
                   numberArabic = -1
@@ -359,7 +359,7 @@
 
       CASE (NumeralCharacters(1))
          newValue = RomanNumberValues(1)         ! I = 1
-         
+
          !call counting(1,counters)
          counters(1) = counters(1) + 1
          if (counters(1).gt.validCount(1)) then

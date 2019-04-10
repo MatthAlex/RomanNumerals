@@ -17,8 +17,8 @@
    ! Check argument count and abort if different than 2
    argument_count = COMMAND_ARGUMENT_COUNT()
    if (argument_count .ne. 2) then
-      write(*,*) 'ERROR: Only two command line arguments allowed.'
-      stop 1
+      !write(*,*) 'ERROR: Only two command line arguments allowed.'
+      stop 'ERROR: Only two command line arguments allowed.'
    end if
 
    ! Read arguments #1 and #2 from the command line
@@ -27,20 +27,20 @@
 
    ! Adjust to the left and trim trailing spaces of the strings, and then check for invalid ASCII characters
    call buffer_to_string(command_line_argument_1, Numeral_1, err)
-   if (err.ne.0) stop 2
+   if (err.ne.0) stop
    call verify_string(Numeral_1, err)
-   if (err.ne.0) stop 3
+   if (err.ne.0) stop
 
    call buffer_to_string(command_line_argument_2, Numeral_2, err)
-   if (err.ne.0) stop 2
+   if (err.ne.0) stop
    call verify_string(Numeral_2, err)
-   if (err.ne.0) stop 3
+   if (err.ne.0) stop
 
    ! Translate numerals to numbers
    Number_1 = numeral_to_number(Numeral_1)
-   if (Number_1.eq.-1) stop 4
+   if (Number_1.eq.-1) stop
    Number_2 = numeral_to_number(Numeral_2)
-   if (Number_2.eq.-1) stop 4
+   if (Number_2.eq.-1) stop
 
    ! Add the numbers
    Number_Sum = Number_1 + Number_2
@@ -55,8 +55,8 @@
    ! Check that the conversion holds true
    Number_Check_Sum = numeral_to_number(Numeral_Sum)
    if (Number_Check_Sum.ne.Number_Sum) then
-      write(*,*) 'ERROR: The sum and numeral are not equal.'
-      stop 5
+      !write(*,*) 'ERROR: The sum and numeral are not equal.'
+      stop 'ERROR: The sum and numeral are not equal.'
    end if
 
    write(*,*) Numeral_Sum
