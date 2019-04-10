@@ -10,6 +10,7 @@
    integer   :: Number_1 , Number_2   !! Store the Numerals in the equivalent numerical form
    integer :: Number_Sum, Number_Check_Sum   !! Store the sum of the two numbers   !! Store the final Numeral result in equivalent number
    integer :: argument_count   !! Number of command line arguments
+   integer :: err !! error state
    character(LEN=20)   :: command_line_argument_1, command_line_argument_2   !! Store the command line input arguments
    character(LEN=:), allocatable   :: Numeral_1, Numeral_2, Numeral_Sum   !! Store the numerals in a string of deferred length
 
@@ -17,7 +18,7 @@
    argument_count = COMMAND_ARGUMENT_COUNT()
    if (argument_count .ne. 2) then
       write(*,*) 'ERROR: Only two command line arguments allowed.'
-      stop
+      stop 1
    end if
 
    ! Read arguments #1 and #2 from the command line
@@ -25,15 +26,21 @@
    call GET_COMMAND_ARGUMENT(2, command_line_argument_2)
 
    ! Adjust to the left and trim trailing spaces of the strings, and then check for invalid ASCII characters
-   call buffer_to_string(command_line_argument_1, Numeral_1)
-   call verify_string(Numeral_1)
+   call buffer_to_string(command_line_argument_1, Numeral_1, err)
+   if (err.ne.0) stop 2
+   call verify_string(Numeral_1, err)
+   if (err.ne.0) stop 3
 
-   call buffer_to_string(command_line_argument_2, Numeral_2)
-   call verify_string(Numeral_2)
+   call buffer_to_string(command_line_argument_2, Numeral_2, err)
+   if (err.ne.0) stop 2
+   call verify_string(Numeral_2, err)
+   if (err.ne.0) stop 3
 
    ! Translate numerals to numbers
    Number_1 = numeral_to_number(Numeral_1)
+   if (Number_1.eq.-1) stop 4
    Number_2 = numeral_to_number(Numeral_2)
+   if (Number_2.eq.-1) stop 4
 
    ! Add the numbers
    Number_Sum = Number_1 + Number_2
@@ -49,7 +56,7 @@
    Number_Check_Sum = numeral_to_number(Numeral_Sum)
    if (Number_Check_Sum.ne.Number_Sum) then
       write(*,*) 'ERROR: The sum and numeral are not equal.'
-      stop
+      stop 5
    end if
 
    write(*,*) Numeral_Sum
