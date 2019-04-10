@@ -7,11 +7,11 @@
    use routines
    implicit none
 
-   integer   :: Number_1 , Number_2   !! Store the Numerals in the equivalent numerical form
+   integer :: Number_1 , Number_2   !! Store the Numerals in the equivalent numerical form
    integer :: Number_Sum, Number_Check_Sum   !! Store the sum of the two numbers   !! Store the final Numeral result in equivalent number
    integer :: argument_count   !! Number of command line arguments
    integer :: err !! error state
-   character(LEN=20)   :: command_line_argument_1, command_line_argument_2   !! Store the command line input arguments
+   character(LEN=20) :: command_line_argument_1, command_line_argument_2   !! Store the command line input arguments
    character(LEN=:), allocatable   :: Numeral_1, Numeral_2, Numeral_Sum   !! Store the numerals in a string of deferred length
 
    ! Check argument count and abort if different than 2

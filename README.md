@@ -9,8 +9,9 @@ cd TaskRevisited/src/
 make clean
 ```
 
-To build the debug version of the program: `make debug`
-or `make build` to build the prod version.
+To build the debug version of the program: `make debug`.
+
+To build the prod version: `make build`.
 
 ## Testing
 
@@ -32,5 +33,7 @@ cd TaskRevisited/tests/
 ### In-depth testing
 
 Unit testing setup.
-[x] Source code readied
-[ ] Testing programs setup
+
+- [x] Source code readied
+
+- [ ] Testing programs setup
