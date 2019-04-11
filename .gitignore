@@ -5,6 +5,8 @@
 *.bak
 
 RomanNum
-test
+test/test
+test/test2
+test/test3
 
 doc/

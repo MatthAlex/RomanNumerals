@@ -37,3 +37,10 @@ Unit testing setup.
 - [x] Source code readied
 
 - [ ] Testing programs setup
+
+```
+cd /test
+. t.sh
+```
+
+The `t.sh` script will clean the test directory, compile all tests and run them sequentially. In the case of a failure, the tests will abort.

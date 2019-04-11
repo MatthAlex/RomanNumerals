@@ -30,6 +30,11 @@ test: $(objects)
 %.o: %.f90
 	$(FC) -c $(FCDEBUG) $<
 	
+test2: $(objects)
+	$(FC) -o test2 test2.f90 $(FCDEBUG) $(objects)
+%.o: %.f90
+	$(FC) -c $(FCDEBUG) $<
+	
 # Dependencies
 routines.o: parameters.o
 
