@@ -104,7 +104,7 @@ number = numeral_to_number('XCL')
 number = numeral_to_number('CMD')
     if (number.ne.-1) stop 19
 
-invalid (invalid numeral succession)
+! invalid (invalid numeral succession)
 number = numeral_to_number('XIXC')
     if (number.ne.-1) stop 20
 

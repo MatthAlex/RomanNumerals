@@ -45,8 +45,9 @@ routines.o: parameters.o
 
 # Clean up
 clean:
-	@rm -f $(objects) RomanNum $(objects:.o=.mod)
-
+	@rm -f $(objects) test $(objects:.o=.mod)
+	@rm -f $(objects) test2 $(objects:.o=.mod)
+	@rm -f $(objects) test3 $(objects:.o=.mod)
 
 
 # End of the makefile
