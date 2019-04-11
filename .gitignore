@@ -3,6 +3,7 @@
 *.exe
 *.mod
 *.bak
+*.dat
 
 RomanNum
 test/test

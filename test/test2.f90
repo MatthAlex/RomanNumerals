@@ -64,7 +64,7 @@ if (error.ne.0) stop 9
 buffer = 'CCCCCMCMCMCMMXCLdDcaas2db'
 call buffer_to_string(buffer, StringValue, error)
 call verify_string(StringValue, error)
-if (error.ne.1) stop 7
+if (error.ne.1) stop 10
 
 write(*,*) "Ignore 'ERROR' messages. Don't ignore warnings by the compiler."
 write(*,*) "Test successful!"

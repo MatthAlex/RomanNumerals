@@ -38,9 +38,13 @@ Unit testing setup.
 
 - [ ] Testing programs setup
 
+Move into the `test` folder and run the tests:
+
 ```
-cd /test
+cd TaskRevisited/test
 . t.sh
 ```
 
 The `t.sh` script will clean the test directory, compile all tests and run them sequentially. In the case of a failure, the tests will abort.
+
+Use `. t.sh >> a.dat 2>&1` to pipe the output to a file, and `cat a.dat` to view the contents.
