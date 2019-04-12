@@ -8,7 +8,7 @@ character(LEN=:), allocatable   :: StringValue   !! output
 integer, parameter :: read_unit = 99
 
 open(unit=read_unit, file='ronsPlain.txt', iostat=ios)
-if ( ios /= 0 ) stop "Error opening file data.dat"
+if ( ios /= 0 ) stop "Error opening file ronsPlain.txt"
 
 do
     read(read_unit, '(A20)', iostat=ios) buffer

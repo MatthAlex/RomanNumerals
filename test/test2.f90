@@ -2,12 +2,30 @@ program test_verifyString
 use routines
 
 implicit none
-integer :: error
+integer :: error, ios, i
 character(LEN=20) :: buffer   !! input
 character(LEN=:), allocatable   :: StringValue   !! output
+integer, parameter :: read_unit = 99
+
+open(unit=read_unit, file='asciiPlain.txt', iostat=ios)
+if ( ios /= 0 ) stop "Error opening file asciiPlain.txt"
+
+do
+    read(read_unit, '(A20)', iostat=ios) buffer
+    if (ios /= 0) exit
+
+    call buffer_to_string(buffer, StringValue, error)
+    call verify_string(StringValue, error)
+    if (error.ne.1) then
+        i = VERIFY(StringValue, "IVXLCDM")
+        if (i.ne.0) stop 20
+    end if
+end do
+
+close(read_unit)
 
 ! invalid
-buffer = 'a'
+buffer = 'a15'
 call buffer_to_string(buffer, StringValue, error)
 call verify_string(StringValue, error)
 if (error.ne.1) stop 1
