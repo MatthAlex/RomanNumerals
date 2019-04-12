@@ -3,7 +3,6 @@ use routines, only: buffer_to_string
 
 implicit none
 integer :: error
-!integer :: expectedError
 character(LEN=20) :: buffer   !! input
 character(LEN=:), allocatable   :: StringValue   !! output
 
@@ -40,7 +39,7 @@ buffer = 'a/12516adg`+]][' ! invalid characters
 call buffer_to_string(buffer, StringValue, error)
 if (error.ne.0) stop 8
 
-write(*,*) "Ignore 'ERROR' messages. Don't ignore warnings by the compiler."
-write(*,*) "Test successful!"
+!write(*,*) "Ignore 'ERROR' messages. Don't ignore warnings by the compiler."
+write(*,'(A16)') "Test successful!"
 
 end program test

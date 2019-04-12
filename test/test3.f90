@@ -2,12 +2,9 @@ program test_numeral_to_number
 use routines
 
 implicit none
-integer :: error
-integer :: number
+integer :: error, number, ios
 character(LEN=20) :: buffer   !! input
 character(LEN=:), allocatable   :: StringValue   !! output
-
-integer :: ios
 integer, parameter :: read_unit = 99
 
 open(unit=read_unit, file='ronsPlain.txt', iostat=ios)
@@ -108,7 +105,7 @@ number = numeral_to_number('CMD')
 number = numeral_to_number('XIXC')
     if (number.ne.-1) stop 20
 
-write(*,*) "Ignore 'ERROR' messages. Don't ignore warnings by the compiler."
-write(*,*) "Test successful!"
+!write(*,*) "Ignore 'ERROR' messages. Don't ignore warnings by the compiler."
+write(*,'(A16)') "Test successful!"
 
 end program test_numeral_to_number

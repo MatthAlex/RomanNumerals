@@ -39,6 +39,11 @@ test3: $(objects)
 	$(FC) -o test3 test3.f90 $(FCDEBUG) $(objects)
 %.o: %.f90
 	$(FC) -c $(FCDEBUG) $<
+
+test4: $(objects)
+	$(FC) -o test4 test4.f90 $(FCDEBUG) $(objects)
+%.o: %.f90
+	$(FC) -c $(FCDEBUG) $<
 	
 # Dependencies
 routines.o: parameters.o
@@ -48,6 +53,7 @@ clean:
 	@rm -f $(objects) test $(objects:.o=.mod)
 	@rm -f $(objects) test2 $(objects:.o=.mod)
 	@rm -f $(objects) test3 $(objects:.o=.mod)
+	@rm -f $(objects) test4 $(objects:.o=.mod)
 
 
 # End of the makefile
