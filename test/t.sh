@@ -19,3 +19,4 @@ echo -e "\nRunning test4..."
 ./test4 | awk '/Test/ {printf $0} /stop/ {printf $0}'
 
 echo
+echo
