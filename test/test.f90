@@ -27,11 +27,11 @@ buffer = 'I' ! valid string(LEN=1)
 call buffer_to_string(buffer, StringValue, error)
 if (error.ne.0) stop 5
 
-buffer = 'a123456789123456789123456' ! invalid character(LEN=27), Warned by Compiler
+buffer = 'a123456789123456789' ! invalid character(LEN=27), Warned by Compiler
 call buffer_to_string(buffer, StringValue, error)
 if (error.ne.0) stop 6
 
-buffer = 'a123456789       1234567' ! invalid character(LEN=27), Warned by Compiler
+buffer = 'a123456789  123' ! invalid character(LEN=27), Warned by Compiler
 call buffer_to_string(buffer, StringValue, error)
 if (error.ne.0) stop 7
 

@@ -49,19 +49,19 @@ call verify_string(StringValue, error)
 if (error.ne.0) stop 4
 
 ! valid & truncated
-buffer = 'CCCCCMCMCMCMMXMXMMIIIIIVXXCCC'
+buffer = 'CCCCCMCMCMCMMXMXMMII'
 call buffer_to_string(buffer, StringValue, error)
 call verify_string(StringValue, error)
 if (error.ne.0) stop 5
 
 ! invalid string, but is truncated after LEN=20, turns to valid
-buffer = 'CCCCCMCMCMCMMXMXMMIIIIIVXXCCC12512515'
-call buffer_to_string(buffer, StringValue, error)
-call verify_string(StringValue, error)
-if (error.ne.0) stop 6
+!buffer = 'CCCCCMCMCMCMMXMXMMIII'
+!call buffer_to_string(buffer, StringValue, error)
+!call verify_string(StringValue, error)
+!if (error.ne.0) stop 6
 
 ! invalid string
-buffer = 'CCCCCMCMCMCMMXCaas2db'
+buffer = 'CCCCCMCMCMCMMXCaas2d'
 call buffer_to_string(buffer, StringValue, error)
 call verify_string(StringValue, error)
 if (error.ne.1) stop 7
@@ -79,7 +79,7 @@ call verify_string(StringValue, error)
 if (error.ne.0) stop 9
 
 ! invalid string & truncated @ ca^
-buffer = 'CCCCCMCMCMCMMXCLdDcaas2db'
+buffer = 'CCCCCMCMCMCMMXCLdDca'
 call buffer_to_string(buffer, StringValue, error)
 call verify_string(StringValue, error)
 if (error.ne.1) stop 10
