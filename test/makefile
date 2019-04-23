@@ -4,7 +4,7 @@ SHELL = /bin/sh
 
 # Define variables
 objects = parameters.o routines.o
-FC = gfortran-8
+FC = gfortran
 # ifort, mpif90, nagfor, etc..
 FCFLAGS = -fbacktrace -Ofast
 FCDEBUG = -fbacktrace -Wall -fbounds-check -fasynchronous-unwind-tables -g
