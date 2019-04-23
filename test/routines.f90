@@ -71,20 +71,18 @@
    !> The resulting string cannot be empty.
 
    subroutine buffer_to_string(buffer, StringValue, error)
-   !use parameters, only: debugMode
    implicit none
    integer, intent(out) :: error
    character(LEN=*), intent(in)   :: buffer
    character(LEN=:), allocatable, intent(out) :: StringValue
 
    error = 0
-   StringValue = to_upper( trim(adjustL(buffer)) )
+   StringValue = to_upper( TRIM(ADJUSTL(buffer)) )
 
    if (StringValue.eq.'') then
       write(*,*) 'ERROR: command line argument empty.'
       error = 1
       return
-      !stop
    end if
 
    end subroutine buffer_to_string
@@ -98,8 +96,8 @@
    use parameters, only: RomanNumberValues, numeralCharacters
    implicit none
    integer, value :: numberArabic   !! dummy value initialized to numberArabic
-   integer   :: i, integerDivision
-   character(LEN=:) , allocatable, intent(out) :: numeral
+   integer :: i, integerDivision
+   character(LEN=:), allocatable, intent(out) :: numeral
 
    numeral = ''
 

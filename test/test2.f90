@@ -1,90 +1,60 @@
+! Intention:
+! Verify that the string passed contains only valid Numeral characters.
+! Inclusion of any other character should invalidate the input.
+
 program test_verifyString
-use routines
+use routines, only: verify_string
 
 implicit none
-integer :: error, ios, i
-character(LEN=20) :: buffer   !! input
-character(LEN=:), allocatable   :: StringValue   !! output
-integer, parameter :: read_unit = 99
+integer :: error, i
+character(LEN=:), allocatable :: test_string   !! input
 
-open(unit=read_unit, file='asciiPlain.txt', iostat=ios)
-if ( ios /= 0 ) stop "Error opening file asciiPlain.txt"
+do i = 1, 127
+    test_string = ACHAR(i)
 
-do
-    read(read_unit, '(A20)', iostat=ios) buffer
-    if (ios /= 0) exit
-
-    call buffer_to_string(buffer, StringValue, error)
-    call verify_string(StringValue, error)
+    call verify_string(test_string, error)
     if (error.ne.1) then
-        i = VERIFY(StringValue, "IVXLCDM")
-        if (i.ne.0) stop 20
+        error = VERIFY(test_string, "IVXLCDM")
+        if (error.ne.0) stop 20
     end if
 end do
 
-close(read_unit)
+!-------------- List of valid inputs -----------------
+! valid character
+call verify_string('I', error)
+if (error.ne.0) stop 1
 
-! invalid
-buffer = 'a15'
-call buffer_to_string(buffer, StringValue, error)
-call verify_string(StringValue, error)
-if (error.ne.1) stop 1
+! valid string
+call verify_string('IXC', error)
+if (error.ne.0) stop 2
 
-! invalid
-buffer = 'bb'
-call buffer_to_string(buffer, StringValue, error)
-call verify_string(StringValue, error)
-if (error.ne.1) stop 2
-
-! valid
-buffer = 'I'
-call buffer_to_string(buffer, StringValue, error)
-call verify_string(StringValue, error)
+! valid string
+call verify_string('CCCCCMCMCMCMMXMXMMII', error)
 if (error.ne.0) stop 3
 
-! valid
-buffer = 'IXC'
-call buffer_to_string(buffer, StringValue, error)
-call verify_string(StringValue, error)
-if (error.ne.0) stop 4
+!-------------- List of invalid inputs ----------------
+! invalid alphanumeric input
+call verify_string('a15', error)
+if (error.ne.1) stop 4
 
-! valid & truncated
-buffer = 'CCCCCMCMCMCMMXMXMMII'
-call buffer_to_string(buffer, StringValue, error)
-call verify_string(StringValue, error)
-if (error.ne.0) stop 5
-
-! invalid string, but is truncated after LEN=20, turns to valid
-!buffer = 'CCCCCMCMCMCMMXMXMMIII'
-!call buffer_to_string(buffer, StringValue, error)
-!call verify_string(StringValue, error)
-!if (error.ne.0) stop 6
+! invalid characters
+call verify_string('bb', error)
+if (error.ne.1) stop 5
 
 ! invalid string
-buffer = 'CCCCCMCMCMCMMXCaas2d'
-call buffer_to_string(buffer, StringValue, error)
-call verify_string(StringValue, error)
+call verify_string('CCCCCMCMCMCMMXCaas2d', error)
+if (error.ne.1) stop 6
+
+! invalid string
+call verify_string('I_op', error)
 if (error.ne.1) stop 7
 
-! invalid
-buffer = 'I_op'
-call buffer_to_string(buffer, StringValue, error)
-call verify_string(StringValue, error)
+! invalid string due to lower case
+call verify_string('IcvXMmXcxCiIXCMDLld', error)
 if (error.ne.1) stop 8
 
-! valid
-buffer = 'IcvXMmXcxCiIXCMDLld'
-call buffer_to_string(buffer, StringValue, error)
-call verify_string(StringValue, error)
-if (error.ne.0) stop 9
-
-! invalid string & truncated @ ca^
-buffer = 'CCCCCMCMCMCMMXCLdDca'
-call buffer_to_string(buffer, StringValue, error)
-call verify_string(StringValue, error)
-if (error.ne.1) stop 10
-
-!write(*,*) "Ignore 'ERROR' messages. Don't ignore warnings by the compiler."
-write(*,'(A16)') "Test successful!"
+! invalid string w/ spaces injected
+call verify_string('CCCCCM  CMCMCM', error)
+if (error.ne.1) stop 9
 
 end program test_verifyString
