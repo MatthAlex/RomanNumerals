@@ -7,6 +7,7 @@ use routines, only: numeral_to_number
 
 implicit none
 integer :: ios
+character(LEN=20) :: buffer !! large enough buffer to hold string
 character(LEN=:), allocatable :: test_input   !! input string with enough space for any Roman Numeral from 1-3999
 integer, parameter :: read_unit = 99
 
@@ -14,9 +15,10 @@ open(unit=read_unit, file='ronsPlain.txt', iostat=ios)
 if ( ios /= 0 ) stop 77 !"Error opening file ronsPlain.txt"
 
 do
-    read(read_unit, '(A20)', iostat=ios) test_input
+    read(read_unit, '(A20)', iostat=ios) buffer
     if (ios /= 0) exit
 
+    test_input = TRIM(buffer)
     if (numeral_to_number(test_input).eq.-1) stop 21
 
 end do
