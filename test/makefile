@@ -4,19 +4,15 @@ SHELL = /bin/sh
 
 # Define variables
 objects = parameters.o routines.o
-FC = gfortran
+FC = gfortran-8
 # ifort, mpif90, nagfor, etc..
-FCFLAGS   = -fbacktrace -Ofast
-FCDEBUG = -fbacktrace -Wall -fbounds-check
+FCFLAGS = -fbacktrace -Ofast
+FCDEBUG = -fbacktrace -Wall -fbounds-check -fasynchronous-unwind-tables -g
 
 
 # Makefile
 build: $(objects)
 	$(FC) -o RomanNum RomanNum.f90 $(FCFLAGS) $(objects)
-#routines.o: routines.f90
-#	$(FC) -c routines.f90
-#parameters.o: parameters.f90
-#	$(FC) -c parameters.f90
 %.o: %.f90
 	$(FC) -c $(FCFLAGS) $<
 

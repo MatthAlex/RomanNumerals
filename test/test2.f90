@@ -14,8 +14,7 @@ do i = 1, 127
 
     call verify_string(test_string, error)
     if (error.ne.1) then
-        error = VERIFY(test_string, "IVXLCDM")
-        if (error.ne.0) stop 20
+        if (VERIFY(test_string, "IVXLCDM").ne.0) stop 20
     end if
 end do
 
