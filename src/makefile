@@ -3,35 +3,44 @@
 SHELL = /bin/sh
 
 # Define variables
-objects = parameters.o routines.o
+OBJECTS = parameters.o routines.o
+MAIN_PROG = RomanNum
+TEST_DIR = ../test
+TEST_PROGS = $(TEST_DIR)/test $(TEST_DIR)/test2 $(TEST_DIR)/test3 $(TEST_DIR)/test4
 FC = gfortran
 # ifort, mpif90, nagfor, etc..
-FCFLAGS   = -fbacktrace -Ofast
-FCDEBUG = -fbacktrace -Wall -fbounds-check
+FCFLAGS = -fbacktrace -Ofast
+FCDEBUG = -fbacktrace -Wall -fbounds-check -fasynchronous-unwind-tables -g
 
 
 # Makefile
-build: $(objects)
-	$(FC) -o RomanNum RomanNum.f90 $(FCFLAGS) $(objects)
-#routines.o: routines.f90
-#	$(FC) -c routines.f90
-#parameters.o: parameters.f90
-#	$(FC) -c parameters.f90
+build: $(OBJECTS)
+	$(FC) -o $(MAIN_PROG) $(MAIN_PROG).f90 $(FCFLAGS) $(OBJECTS)
+
 %.o: %.f90
 	$(FC) -c $(FCFLAGS) $<
 
-debug: $(objects)
-	$(FC) -o RomanNum RomanNum.f90 $(FCDEBUG) $(objects)
-%.o: %.f90
-	$(FC) -c $(FCDEBUG) $<
+debug: $(OBJECTS)
+	$(FC) -o $(MAIN_PROG) $(MAIN_PROG).f90 $(FCDEBUG) $(OBJECTS)
+
+$(TEST_PROGS): %: %.f90
+	$(FC) -o $@ $^ $(FCDEBUG) $(OBJECTS)
+	@echo "\nRunning test...\n"
+	@$@ | awk '/Test/ {printf $0} /stop/ {printf $0}'
+
+.PHONY: testing
+testing: $(OBJECTS) $(TEST_PROGS)
 	
+.PHONY: check
+check: clean testing
+
 # Dependencies
 routines.o: parameters.o
 
 # Clean up
+.PHONY: clean
 clean:
-	@rm -f $(objects) RomanNum $(objects:.o=.mod)
-
-
+	$(RM) $(OBJECTS) RomanNum $(OBJECTS:.o=.mod)
+	$(RM) $(TEST_PROGS)
 
 # End of the makefile
