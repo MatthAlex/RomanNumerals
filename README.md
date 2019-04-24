@@ -4,7 +4,7 @@
 
 To clean the directory of objects and modules:
 
-```
+```bash
 cd TaskRevisited/src/
 make clean
 ```
@@ -18,14 +18,14 @@ To build the prod version: `make build`.
 After building the prod version;
 To output the nominal sum of all numerals from 1 to 3999 plus 1:
 
-```
+```bash
 cd TaskRevisited/tests/
 ./qrun.sh ronsPlain.txt
 ```
 
 To test the input of ASCII characters:
 
-```
+```bash
 cd TaskRevisited/tests/
 ./qrun.sh asciiPlain.txt
 ```
@@ -36,15 +36,17 @@ Unit testing setup.
 
 - [x] Source code readied
 
-- [ ] Testing programs setup
+- [x] Testing programs setup
 
-Move into the `test` folder and run the tests:
+- [x] Makefile included functionality
 
+- [x] Jenkins set to run tests
+
+Move into the `/src/` folder and run:
+
+```bash
+cd TaskRevisited/src/
+make check
 ```
-cd TaskRevisited/test
-. t.sh
-```
 
-The `t.sh` script will clean the test directory, compile all tests and run them sequentially. In the case of a failure, the tests will abort.
-
-Use `. t.sh >> a.dat 2>&1` to pipe the output to a file, and `cat a.dat` to view the contents.
+This will compile all tests and run them.
