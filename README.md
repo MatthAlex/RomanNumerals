@@ -43,4 +43,6 @@ At the root directory run:
 make check
 ```
 
+To propagate through all tests despite STOP errors run `make check -k` instead. Jenkins *should* have this enabled.
+
 This will compile all tests and run them. Any invalid exit codes will be picked up, Jenkins included.

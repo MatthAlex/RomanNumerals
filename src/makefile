@@ -8,7 +8,7 @@ MAIN_PROG = RomanNum
 FC = gfortran
 # ifort, mpif90, nagfor, etc..
 FCFLAGS = -fbacktrace -Ofast
-FCDEBUG = -fbacktrace -Wall -fbounds-check -fasynchronous-unwind-tables -g
+FCDEBUG = -fbacktrace -Wall -Wextra -fbounds-check -fasynchronous-unwind-tables -g
 
 .PHONY: clean all debug
 
