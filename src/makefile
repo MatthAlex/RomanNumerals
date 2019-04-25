@@ -13,6 +13,8 @@ FCDEBUG = -fbacktrace -Wall -fbounds-check -fasynchronous-unwind-tables -g
 .PHONY: clean build debug
 
 # Makefile
+all: build
+
 build: $(OBJECTS)
 	$(FC) -o $(MAIN_PROG) $(MAIN_PROG).f90 $(FCFLAGS) $(OBJECTS)
 

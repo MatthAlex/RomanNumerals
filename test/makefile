@@ -3,37 +3,38 @@
 SHELL = /bin/sh
 
 # Define variables
-TEST_OBJECTS = $(SRC_DIR)/parameters.o $(SRC_DIR)/routines.o
 FC = gfortran
 SRC_DIR = ../src
 TEST_PROGS = test test2 test3 test4
+#TEST_OBJECTS = parameters.o routines.o
+TEST_OBJECTS = $(SRC_DIR)/parameters.o $(SRC_DIR)/routines.o
 # ifort, mpif90, nagfor, etc..
-FCFLAGS = -fbacktrace -Ofast
-FCDEBUG = -fbacktrace -Wall -fbounds-check -fasynchronous-unwind-tables -g
+FCFLAGS = -fbacktrace -Ofast -I$(SRC_DIR)
+FCDEBUG = -fbacktrace -Wall -fbounds-check -fasynchronous-unwind-tables -g -I$(SRC_DIR)
+runAll = $(addprefix run_,$(TEST_PROGS))
 
-.PHONY: testing check clean
+.PHONY: check clean all cleanLog $(runAll)
 
 # Makefile
-$(TEST_PROGS): %: %.f90
-	$(FC) -o $@ $^ $(FCDEBUG) $(TEST_OBJECTS)
-	@echo "\nRunning test...\n"
-	@$@ | awk '/Test/ {printf $0} /stop/ {printf $0}'
 
-# $(TEST_OBJECTS): %.o %.f90
+$(TEST_PROGS): %: %.f90 $(TEST_OBJECTS)
+	$(FC) -o $@ $(FCDEBUG) $^
 
-$(TEST_OBJECTS): %.o: %.f90
-	$(FC) -c $(FCFLAGS) $(SRC_DIR)/$<
+# % does the pattern matching
+# $* picks up what the pattern matched is
+# runAll is dependent on each of its components: run_test*
+# each run_test* is dependent on the test* executable
+$(runAll): run_%: %
+	@echo Run $*
+	@./$* >> log.dat
 
-testing: $(TEST_OBJECTS) $(TEST_PROGS)
-
-check: clean testing
-
-# Dependencies
-routines.o: parameters.o
+check: cleanLog $(runAll)
 
 # Clean up
-clean:
-	$(RM) $(TEST_PROGS)
+cleanLog:
+	$(RM) log.dat
 
+clean: cleanLog
+	$(RM) $(TEST_PROGS)
 
 # End of the makefile
