@@ -2,20 +2,15 @@
 
 ## Building and Running the program
 
-To clean the directory of objects and modules:
-
-```bash
-cd TaskRevisited/src/
-make clean
-```
+To clean the directory of objects and modules, executables, and logs: `make clean`.
 
 To build the debug version of the program: `make debug`.
 
-To build the prod version: `make build`.
+To build the production version: `make all`.
 
 ## Testing
 
-After building the prod version;
+After building the production version;
 To output the nominal sum of all numerals from 1 to 3999 plus 1:
 
 ```bash
@@ -42,11 +37,10 @@ Unit testing setup.
 
 - [x] Jenkins set to run tests
 
-Move into the `/src/` folder and run:
+At the root directory run:
 
 ```bash
-cd TaskRevisited/src/
 make check
 ```
 
-This will compile all tests and run them.
+This will compile all tests and run them. Any invalid exit codes will be picked up, Jenkins included.

@@ -10,12 +10,10 @@ FC = gfortran
 FCFLAGS = -fbacktrace -Ofast
 FCDEBUG = -fbacktrace -Wall -fbounds-check -fasynchronous-unwind-tables -g
 
-.PHONY: clean build debug
+.PHONY: clean all debug
 
 # Makefile
-all: build
-
-build: $(OBJECTS)
+all: $(OBJECTS)
 	$(FC) -o $(MAIN_PROG) $(MAIN_PROG).f90 $(FCFLAGS) $(OBJECTS)
 
 %.o: %.f90
@@ -30,6 +28,5 @@ routines.o: parameters.o
 # Clean up
 clean:
 	$(RM) $(OBJECTS) RomanNum $(OBJECTS:.o=.mod)
-	# $(RM) $(TEST_PROGS)
 
 # End of the makefile
