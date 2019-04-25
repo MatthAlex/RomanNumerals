@@ -1,18 +1,15 @@
-!! Intention:
-!! pass the command line provided string with a fixed length, into a string of deferred length,
-!! after adjusting characters to left, removing all spaces (trailing/leading), and turn characters
-!! to upper case.
-!! Test cases include strings of various lengths, which include spaces in various positions.
+!> Intention:
+!> pass the command line provided string with a fixed length, into a string of deferred length,
+!> after adjusting characters to left, removing all spaces (trailing/leading), and turn characters
+!> to upper case.
+!> Test cases include strings of various lengths, which include spaces in various positions.
 
 program test
 use routines, only: buffer_to_string
 
 implicit none
 integer :: error
-!character(LEN=:), allocatable :: test_input    !! input
 character(LEN=:), allocatable :: test_string   !! output
-
-! input: test_input, output: test_string, error
 
 ! ------ Invalid input -------------
 call buffer_to_string('', test_string, error)

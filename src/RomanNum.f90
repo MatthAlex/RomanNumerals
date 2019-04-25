@@ -8,7 +8,7 @@
    implicit none
 
    integer :: Number_1 , Number_2   !! Store the Numerals in the equivalent numerical form
-   integer :: Number_Sum, Number_Check_Sum   !! Store the sum of the two numbers   !! Store the final Numeral result in equivalent number
+   integer :: Number_Sum, Number_Check_Sum   !! Store the sum of the two numbers and final Numeral result in equivalent number
    integer :: argument_count   !! Number of command line arguments
    integer :: err !! error state
    character(LEN=20) :: command_line_argument_1, command_line_argument_2   !! Store the command line input arguments
@@ -17,7 +17,6 @@
    ! Check argument count and abort if different than 2
    argument_count = COMMAND_ARGUMENT_COUNT()
    if (argument_count .ne. 2) then
-      !write(*,*) 'ERROR: Only two command line arguments allowed.'
       stop 'ERROR: Only two command line arguments allowed.'
    end if
 
@@ -55,11 +54,9 @@
    ! Check that the conversion holds true
    Number_Check_Sum = numeral_to_number(Numeral_Sum)
    if (Number_Check_Sum.ne.Number_Sum) then
-      !write(*,*) 'ERROR: The sum and numeral are not equal.'
       stop 'ERROR: The sum and numeral are not equal.'
    end if
 
    write(*,*) Numeral_Sum
-
 
    end program numerals

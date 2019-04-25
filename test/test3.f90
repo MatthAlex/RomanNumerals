@@ -1,6 +1,6 @@
-! Intention:
-! Validate that a string of roman numeral characters has the correct
-! numeral structure, and stop if incorrect.
+!> Intention:
+!> Validate that a string of roman numeral characters has the correct
+!> numeral structure, and stop if incorrect.
 
 program test_numeral_to_number
 use routines, only: numeral_to_number
@@ -12,7 +12,7 @@ character(LEN=:), allocatable :: test_input   !! input string with enough space 
 integer, parameter :: read_unit = 99
 
 open(unit=read_unit, file='ronsPlain.txt', iostat=ios)
-if ( ios /= 0 ) stop 77 !"Error opening file ronsPlain.txt"
+if ( ios /= 0 ) stop 77
 
 do
     read(read_unit, '(A20)', iostat=ios) buffer

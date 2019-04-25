@@ -33,7 +33,6 @@
          write(*,*) 'ERROR: ',StringValue, ' contains invalid ASCII characters.'
          error = 1
          return
-         !stop
       end if
    end do
 
@@ -60,7 +59,6 @@
       write(*,*) 'ERROR: ',StringValue, ' contains invalid ASCII characters.'
       error = 1
       return
-      !stop
    end if
 
    end subroutine verify_string
@@ -71,7 +69,6 @@
    !> The resulting string cannot be empty.
 
    subroutine buffer_to_string(buffer, StringValue, error)
-   !use parameters, only: debugMode
    implicit none
    integer, intent(out) :: error
    character(LEN=*), intent(in)   :: buffer
@@ -84,7 +81,6 @@
       write(*,*) 'ERROR: command line argument empty.'
       error = 1
       return
-      !stop
    end if
 
    end subroutine buffer_to_string
@@ -156,7 +152,6 @@
       CASE (NumeralCharacters(13))
          newValue = RomanNumberValues(13)                     ! M = 1000
 
-         !call counting(13,counters)
          counters(13) = counters(13) + 1
          if (counters(13).gt.validCount(13)) then
             write(*,*) 'ERROR: INVALID NUMERAL COUNT. MULTIPLES FOUND.'
@@ -169,7 +164,6 @@
                newValue = RomanNumberValues(12)               ! CM = 900
                isDoubleValueNumeral = .TRUE.
 
-               !call counting(12,counters)
                counters(12) = counters(12) + 1
                if (counters(12).gt.validCount(12)) then
                   write(*,*) 'ERROR: INVALID NUMERAL COUNT. MULTIPLES FOUND.'
@@ -181,7 +175,6 @@
                   write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. CM and C found together.'
                   numberArabic = -1
                   return
-                  !stop
                end if
             counters(13) = counters(13) - 1
             end if
@@ -190,7 +183,6 @@
       CASE (NumeralCharacters(11))
          newValue = RomanNumberValues(11)                     ! D = 500
 
-         !call counting(11,counters)
          counters(11) = counters(11) + 1
          if (counters(11).gt.validCount(11)) then
             write(*,*) 'ERROR: INVALID NUMERAL COUNT. MULTIPLES FOUND.'
@@ -203,7 +195,6 @@
                newValue = RomanNumberValues(10)               ! CD = 400
                isDoubleValueNumeral = .TRUE.
 
-               !call counting(10,counters)
                counters(10) = counters(10) + 1
                if (counters(10).gt.validCount(10)) then
                   write(*,*) 'ERROR: INVALID NUMERAL COUNT. MULTIPLES FOUND.'
@@ -215,7 +206,6 @@
                   write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. CD and C found together.'
                   numberArabic = -1
                   return
-                  !stop
                end if
             counters(11) = counters(11) - 1
             end if
@@ -224,7 +214,6 @@
       CASE (NumeralCharacters(9))
          newValue = RomanNumberValues(9)                     ! C = 100
 
-         !call counting(9,counters)
          counters(9) = counters(9) + 1
          if (counters(9).gt.validCount(9)) then
             write(*,*) 'ERROR: INVALID NUMERAL COUNT. MULTIPLES FOUND.'
@@ -237,7 +226,6 @@
                newValue = RomanNumberValues(8)               ! XC = 90
                isDoubleValueNumeral = .TRUE.
 
-               !call counting(8,counters)
                counters(8) = counters(8) + 1
                if (counters(8).gt.validCount(8)) then
                   write(*,*) 'ERROR: INVALID NUMERAL COUNT. MULTIPLES FOUND.'
@@ -249,7 +237,6 @@
                   write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. XC and X found together.'
                   numberArabic = -1
                   return
-                  !stop
                end if
             counters(9) = counters(9) - 1
             end if
@@ -258,7 +245,6 @@
       CASE (NumeralCharacters(7))
          newValue = RomanNumberValues(7)                     ! L = 50
 
-         !call counting(7,counters)
          counters(7) = counters(7) + 1
          if (counters(7).gt.validCount(7)) then
             write(*,*) 'ERROR: INVALID NUMERAL COUNT. MULTIPLES FOUND.'
@@ -271,7 +257,6 @@
                newValue = RomanNumberValues(6)               ! XL = 40
                isDoubleValueNumeral = .TRUE.
 
-               !call counting(6,counters)
                counters(6) = counters(6) + 1
                if (counters(6).gt.validCount(6)) then
                   write(*,*) 'ERROR: INVALID NUMERAL COUNT. MULTIPLES FOUND.'
@@ -283,7 +268,6 @@
                   write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. XL and X found together.'
                   numberArabic = -1
                   return
-                  !stop
                end if
             counters(7) = counters(7) - 1
             end if
@@ -292,7 +276,6 @@
       CASE (NumeralCharacters(5))
          newValue = RomanNumberValues(5)                     ! X = 10
 
-         !call counting(5,counters)
          counters(5) = counters(5) + 1
          if (counters(5).gt.validCount(5)) then
             write(*,*) 'ERROR: INVALID NUMERAL COUNT. MULTIPLES FOUND.'
@@ -305,7 +288,6 @@
                newValue = RomanNumberValues(4)                  ! IX = 9
                isDoubleValueNumeral = .TRUE.
 
-               !call counting(4,counters)
                counters(4) = counters(4) + 1
                if (counters(4).gt.validCount(4)) then
                   write(*,*) 'ERROR: INVALID NUMERAL COUNT. MULTIPLES FOUND.'
@@ -317,7 +299,6 @@
                   write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. I and IX found together.'
                   numberArabic = -1
                   return
-                  !stop
                end if
                counters(5) = counters(5) - 1
             end if
@@ -326,7 +307,6 @@
       CASE (NumeralCharacters(3))
          newValue = RomanNumberValues(3)                     ! V = 5
 
-         !call counting(3,counters)
          counters(3) = counters(3) + 1
          if (counters(3).gt.validCount(3)) then
             write(*,*) 'ERROR: INVALID NUMERAL COUNT. MULTIPLES FOUND.'
@@ -339,7 +319,6 @@
                newValue = RomanNumberValues(2)                  ! IV = 4
                isDoubleValueNumeral = .TRUE.
 
-               !call counting(2, counters)
                counters(2) = counters(2) + 1
                if (counters(2).gt.validCount(2)) then
                   write(*,*) 'ERROR: INVALID NUMERAL COUNT. MULTIPLES FOUND.'
@@ -351,7 +330,6 @@
                   write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. I and IV found together.'
                   numberArabic = -1
                   return
-                  !stop
                end if
                counters(3) = counters(3) - 1
             end if
@@ -360,7 +338,6 @@
       CASE (NumeralCharacters(1))
          newValue = RomanNumberValues(1)         ! I = 1
 
-         !call counting(1,counters)
          counters(1) = counters(1) + 1
          if (counters(1).gt.validCount(1)) then
             write(*,*) 'ERROR: INVALID NUMERAL COUNT. MULTIPLES FOUND.'
@@ -386,7 +363,6 @@
             write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. Two double value numerals in succession'
             numberArabic = -1
             return
-            !stop
          end if
 
    ! This traps double value numerals followed by smaller numerals, which their sum would be assigned a larger value numeral
@@ -395,14 +371,12 @@
             write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION. Double value numeral along with smaller numeral of the same order'
             numberArabic = -1
             return
-            !stop
          end if
 
       else    ! if newValue < previousValue
          write(*,*) 'ERROR: INVALID NUMERAL SUCCESSION'
          numberArabic = -1
          return
-         !stop
       end if
 
    ! update the previous value in preparation of next iteration
@@ -410,26 +384,6 @@
    end do
    end function numeral_to_number
    !==================================================================================================================
-
-   !==================================================================================================================
-   !> This routine iterates the counters for each roman numeral, and compares the amount to the valid count. If the
-   !> count is larger than the valid count, the program stops.
-
-   subroutine counting(order,counters)
-   use parameters, only: validCount
-   implicit none
-   integer, intent(in) :: order
-   integer, dimension(13), intent(inout) :: counters
-
-   counters(order) = counters(order) + 1
-   if (counters(order).gt.validCount(order)) then
-      write(*,*) 'ERROR: INVALID NUMERAL COUNT. MULTIPLES FOUND.'
-      stop
-   end if
-
-   end subroutine counting
-   !==================================================================================================================
-
 
 
    !==================================================================================================================

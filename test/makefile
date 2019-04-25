@@ -6,7 +6,6 @@ SHELL = /bin/sh
 FC = gfortran
 SRC_DIR = ../src
 TEST_PROGS = test test2 test3 test4
-#TEST_OBJECTS = parameters.o routines.o
 TEST_OBJECTS = $(SRC_DIR)/parameters.o $(SRC_DIR)/routines.o
 # ifort, mpif90, nagfor, etc..
 FCFLAGS = -fbacktrace -Ofast -I$(SRC_DIR)

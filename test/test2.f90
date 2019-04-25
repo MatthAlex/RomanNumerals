@@ -1,6 +1,6 @@
-! Intention:
-! Verify that the string passed contains only valid Numeral characters.
-! Inclusion of any other character should invalidate the input.
+!> Intention:
+!> Verify that the string passed contains only valid Numeral characters.
+!> Inclusion of any other character should invalidate the input.
 
 program test_verifyString
 use routines, only: verify_string
