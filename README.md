@@ -45,4 +45,16 @@ make check
 
 To propagate through all tests despite STOP errors run `make check -k` instead. Jenkins *should* have this enabled.
 
-This will compile all tests and run them. Any invalid exit codes will be picked up, Jenkins included.
+This will compile all tests and run them. Any invalid exit codes will be picked up, Jenkins as well.
+
+## Building documentation with FORD
+
+Installation instructions can be found [here](https://github.com/Fortran-FOSS-Programmers/ford).
+
+The relevant project file is `ford.md`.
+
+To produce documentation run: `ford ford.md`.
+
+Documentation will be built under `/doc/`.
+
+Read `index.html` with any browser.
