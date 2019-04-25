@@ -51,6 +51,8 @@ This will compile all tests and run them. Any invalid exit codes will be picked 
 
 Installation instructions can be found [here](https://github.com/Fortran-FOSS-Programmers/ford).
 
+For graphs, install [Graphviz](https://packages.ubuntu.com/cosmic/graphviz), and graphviz: `pip install graphviz`.
+
 The relevant project file is `ford.md`.
 
 To produce documentation run: `ford ford.md`.
