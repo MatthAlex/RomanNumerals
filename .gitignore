@@ -3,7 +3,11 @@
 *.exe
 *.mod
 *.bak
+*.dat
 
 RomanNum
+test/test*
+!test/test*.f90
 
 doc/
+.vscode/

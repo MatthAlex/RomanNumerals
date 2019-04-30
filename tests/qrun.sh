@@ -11,7 +11,7 @@ do
 #numeral= $line | sed 's/[[:space:]]//g'
 
 #echo $numeral
-./RomanNum I $line
+./../src/RomanNum I $line
 
 done < "$filename"
 
