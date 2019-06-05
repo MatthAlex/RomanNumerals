@@ -9,7 +9,7 @@ distdir = $(tarname)-$(version)
 
 INSTALL_DIR=/usr/local/bin/
 
-.PHONY: all check clean install installcheck
+.PHONY: all check clean install installcheck dist FORCE distcheck
 # debug 
 
 all:
@@ -28,6 +28,32 @@ install: all
 installcheck: install
 	which RomanNum
 	@echo '=/usr/local/bin/RomanNum'
+
+dist: $(distdir).tar.gz
+
+$(distdir).tar.gz: $(distdir)
+	tar chof - $(distdir) | gzip -9 -c > $@
+	rm -rf $(distdir)
+
+$(distdir): FORCE
+	mkdir -p $(distdir)/src
+	mkdir -p $(distdir)/test
+	cp makefile $(distdir)
+	cp test/makefile $(distdir)/test
+	cp test/*.f90 $(distdir)/test
+	cp src/makefile $(distdir)/src
+	cp src/*.f90 $(distdir)/src
+
+distcheck: $(distdir).tar.gz
+	gzip -cd $(distdir).tar.gz | tar xvf -
+	cd $(distdir) && $(MAKE) all
+	cd $(distdir) && $(MAKE) clean
+	rm -rf $(distdir)
+	@echo "*** Package $(distdir).tar.gz is ready for distribution."
+
+FORCE:
+	-rm $(distdir).tar.gz >/dev/null 2>&1
+	-rm -rf $(distdir) >/dev/null 2>&1
 
 Makefile: Makefile.in config.status
 	./config.status $@
