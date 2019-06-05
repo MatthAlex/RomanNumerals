@@ -1,28 +1,42 @@
 # Start of the makefile
 # Shell
 SHELL=/bin/sh
+
+package = RomanNum
+version = 0.9.2
+tarname = $(package)
+distdir = $(tarname)-$(version)
+
 INSTALL_DIR=/usr/local/bin/
 
-all: install
+.PHONY: all check clean install installcheck
+# debug 
+
+all:
 	$(MAKE) -C src all
 
 check: all
 	$(MAKE) -C test check
 
-debug:
-	$(MAKE) -C src debug
-
 clean:
 	$(MAKE) -C src clean
 	$(MAKE) -C test clean
 
-install: installcheck
+install: all
 	sudo install -D src/RomanNum $(INSTALL_DIR)
 
-installcheck:
+installcheck: install
 	which RomanNum
 	@echo '=/usr/local/bin/RomanNum'
 
-.PHONY: all check clean debug install installcheck
+Makefile: Makefile.in config.status
+	./config.status $@
+
+config.status: configure
+	./config.status --recheck
+
+#debug:
+#	$(MAKE) -C src debug
+
 
 # End of the makefile
