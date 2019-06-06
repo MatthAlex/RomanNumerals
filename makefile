@@ -7,13 +7,14 @@ version = 0.9.2
 tarname = $(package)
 distdir = $(tarname)-$(version)
 
-INSTALL_DIR=/usr/local/bin/
+prefix=/usr/local/bin
+export prefix
 
-.PHONY: all check clean install installcheck dist FORCE distcheck
+.PHONY: all check clean install installcheck dist FORCE distcheck uninstall
 # debug 
 
-all:
-	$(MAKE) -C src all
+all install uninstall:
+	$(MAKE) -C src $@
 
 check: all
 	$(MAKE) -C test check
@@ -21,13 +22,6 @@ check: all
 clean:
 	$(MAKE) -C src clean
 	$(MAKE) -C test clean
-
-install: all
-	sudo install -D src/RomanNum $(INSTALL_DIR)
-
-installcheck: install
-	which RomanNum
-	@echo '=/usr/local/bin/RomanNum'
 
 dist: $(distdir).tar.gz
 
@@ -47,9 +41,16 @@ $(distdir): FORCE
 distcheck: $(distdir).tar.gz
 	gzip -cd $(distdir).tar.gz | tar xvf -
 	cd $(distdir) && $(MAKE) all
+	cd $(distdir) && $(MAKE) check
+	cd $(distdir) && $(MAKE) prefix=$${PWD}/inst install
+	cd $(distdir) && $(MAKE) prefix=$${PWD}/inst uninstall
 	cd $(distdir) && $(MAKE) clean
 	rm -rf $(distdir)
 	@echo "*** Package $(distdir).tar.gz is ready for distribution."
+
+installcheck:
+	which RomanNum
+	@echo '=$(prefix)/RomanNum'
 
 FORCE:
 	-rm $(distdir).tar.gz >/dev/null 2>&1

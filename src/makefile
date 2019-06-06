@@ -4,13 +4,14 @@ SHELL = /bin/sh
 
 # Define variables
 OBJECTS = parameters.o routines.o
-# MAIN_PROG = RomanNum
+
+# MAIN_PROG = $(package)
 FC = gfortran
 # ifort, mpif90, nagfor, etc..
 FCFLAGS = -fbacktrace -Ofast
 FCDEBUG = -fbacktrace -Wall -Wextra -fbounds-check -fasynchronous-unwind-tables -g
 
-.PHONY: clean all debug
+.PHONY: clean all debug install uninstall
 
 # Makefile
 all: RomanNum
@@ -24,9 +25,22 @@ RomanNum: $(OBJECTS)
 # Dependencies
 routines.o: parameters.o
 
+# Install binary
+# sudo install -D src/RomanNum $(prefix)
+#cp RomanNum $(prefix)
+#chown root:root $(prefix)/RomanNum
+#chmod +x $(prefix)/RomanNum
+
+install: all
+	install -d $(prefix)
+	install -m 0755 RomanNum $(prefix)
+		  
+uninstall:
+	-rm $(prefix)/RomanNum
+
 # Clean up
 clean:
-	@$(RM) $(OBJECTS) $(RomanNum) $(OBJECTS:.o=.mod)
+	@$(RM) $(OBJECTS) RomanNum $(OBJECTS:.o=.mod)
 
 # debug: $(OBJECTS)
 # 	$(FC) -o $(MAIN_PROG) $(FCDEBUG) $(MAIN_PROG).f90 $(OBJECTS)
