@@ -3,12 +3,12 @@
 SHELL = /bin/sh
 
 # Define variables
-FC = gfortran
+# FC = gfortran
 SRC_DIR = ../src
 TEST_PROGS = test test2 test3 test4
 TEST_OBJECTS = $(SRC_DIR)/parameters.o $(SRC_DIR)/routines.o
 # ifort, mpif90, nagfor, etc..
-FCFLAGS = -fbacktrace -Ofast -I$(SRC_DIR)
+# FCFLAGS = -fbacktrace -Ofast -I$(SRC_DIR)
 FCDEBUG = -fbacktrace -Wall -Wextra -fbounds-check -fasynchronous-unwind-tables -g -I$(SRC_DIR)
 runAll = $(addprefix run_,$(TEST_PROGS))
 

@@ -6,10 +6,6 @@ SHELL = /bin/sh
 OBJECTS = parameters.o routines.o
 
 # MAIN_PROG = $(package)
-FC = gfortran
-# ifort, mpif90, nagfor, etc..
-FCFLAGS = -fbacktrace -Ofast
-FCDEBUG = -fbacktrace -Wall -Wextra -fbounds-check -fasynchronous-unwind-tables -g
 
 .PHONY: clean all debug install uninstall
 
@@ -31,12 +27,12 @@ routines.o: parameters.o
 #chown root:root $(prefix)/RomanNum
 #chmod +x $(prefix)/RomanNum
 
-install: all
-	install -d $(prefix)
-	install -m 0755 RomanNum $(prefix)
+install:
+	install -d $(DESTDIR)$(bindir)
+	install -m 0755 RomanNum $(DESTDIR)$(bindir)
 		  
 uninstall:
-	-rm $(prefix)/RomanNum
+	-rm $(DESTDIR)$(bindir)/RomanNum
 
 # Clean up
 clean:
