@@ -13,6 +13,11 @@ prefix		= @prefix@
 exec_prefix = @exec_prefix@
 bindir		= @bindir@
 
+INSTALL         = @INSTALL@
+INSTALL_DATA    = @INSTALL_DATA@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_SCRIPT  = @INSTALL_SCRIPT@
+
 # Define variables
 OBJECTS = parameters.o routines.o
 
@@ -31,8 +36,8 @@ routines.o: parameters.o
 
 # Install binary
 install:
-	install -d $(DESTDIR)$(bindir)
-	install -m 0755 RomanNum $(DESTDIR)$(bindir)
+	$(INSTALL) -d $(DESTDIR)$(bindir)
+	$(INSTALL_PROGRAM) -m 0755 RomanNum $(DESTDIR)$(bindir)
 
 uninstall:
 	-rm $(DESTDIR)$(bindir)/RomanNum
@@ -46,6 +51,7 @@ Makefile: Makefile.in ../config.status
 
 ../config.status: ../configure
 	cd .. && ./config.status --recheck
+
 
 # End of the makefile
 # $@ refers to the full target name of the current target or the archive filename part of a library archive target. This variable is valid in both explicit and implicit rules.
