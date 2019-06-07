@@ -1,17 +1,15 @@
 #! /bin/bash
 
 filename="$1"
-
+mydir="$(dirname "${0}")"
 
 while read -r line
 
 do
-#echo $line
 #numeral=$line | `sed 's/[[:space:]]//g'`
 #numeral= $line | sed 's/[[:space:]]//g'
 
-#echo $numeral
-./../src/RomanNum I $line
+$mydir/../src/RomanNum I $line
 
 done < "$filename"
 
