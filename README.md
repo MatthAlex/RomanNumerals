@@ -1,5 +1,30 @@
 # Task Revisited
 
+## process
+
+- unzip
+`gzip -cd taskrevisited-<version>.tar.gz | tar xvf -`
+
+- configure
+`./configure`
+
+- build
+`make`
+
+- test
+`make check`
+
+- install
+`sudo make install`
+
+- uninstall
+`sudo make uninstall`
+
+- build outside of source folder
+`mkdir /path/to/<directory>`
+`./relative/path/to/configure`
+Then follow previous steps.
+
 ## Building and Running the program
 
 To clean the directory of objects and modules, executables, and logs: `make clean`.

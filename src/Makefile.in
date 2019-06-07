@@ -1,19 +1,27 @@
-# Start of the makefile
-# Shell
-SHELL = /bin/sh
+#@configure_input@
+
+# Package-specific substitution variables
+package 	= @PACKAGE_NAME@
+version 	= @PACKAGE_VERSION@
+tarname 	= @PACKAGE_TARNAME@
+distdir 	= $(tarname)-$(version)
+# VPATH-related substitution variables
+srcdir          = @srcdir@
+VPATH           = @srcdir@
+
+prefix		= @prefix@
+exec_prefix = @exec_prefix@
+bindir		= @bindir@
 
 # Define variables
 OBJECTS = parameters.o routines.o
 
-# MAIN_PROG = $(package)
-
 .PHONY: clean all debug install uninstall
 
-# Makefile
 all: RomanNum
 
 RomanNum: $(OBJECTS)
-	$(FC) -o $@ $(FCFLAGS) $@.f90 $(OBJECTS)
+	$(FC) -o $@ $(FCFLAGS) $(srcdir)/$@.f90 $(OBJECTS)
 
 %.o: %.f90
 	$(FC) -c $(FCFLAGS) $<
@@ -22,15 +30,10 @@ RomanNum: $(OBJECTS)
 routines.o: parameters.o
 
 # Install binary
-# sudo install -D src/RomanNum $(prefix)
-#cp RomanNum $(prefix)
-#chown root:root $(prefix)/RomanNum
-#chmod +x $(prefix)/RomanNum
-
 install:
 	install -d $(DESTDIR)$(bindir)
 	install -m 0755 RomanNum $(DESTDIR)$(bindir)
-		  
+
 uninstall:
 	-rm $(DESTDIR)$(bindir)/RomanNum
 
@@ -38,8 +41,11 @@ uninstall:
 clean:
 	@$(RM) $(OBJECTS) RomanNum $(OBJECTS:.o=.mod)
 
-# debug: $(OBJECTS)
-# 	$(FC) -o $(MAIN_PROG) $(FCDEBUG) $(MAIN_PROG).f90 $(OBJECTS)
+Makefile: Makefile.in ../config.status
+	cd .. && ./config.status src/$@
+
+../config.status: ../configure
+	cd .. && ./config.status --recheck
 
 # End of the makefile
 # $@ refers to the full target name of the current target or the archive filename part of a library archive target. This variable is valid in both explicit and implicit rules.
