@@ -3,11 +3,26 @@
 
 AC_PREREQ([2.69])
 AC_INIT([TaskRevisited], [0.9.2], [m.alexandrakis@qmul.ac.uk])
+AC_CONFIG_MACRO_DIRS([m4])
 AC_CONFIG_SRCDIR([src/RomanNum.f90])
-AC_LANG_PUSH([Fortran])
 
+AM_INIT_AUTOMAKE([foreign subdir-objects])
+LT_INIT
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
+
+# Find Fortran Compiler
+AC_LANG_PUSH([Fortran])
+AC_PROG_FC([ifort gfortran], [Fortran 95])
+AC_FC_PP_SRCEXT([f90])
+AC_LANG_POP([Fortran])
+
+# _DEBUG_START_
+# AC_CHECK_PROG([bash_var], [bash], [yes], [no],, [/usr/sbin/bash])
+# _DEBUG_END_
 # Checks for programs.
 AC_PROG_INSTALL
+AQM_PROG_FORD([no],,[AC_CONFIG_FILES([taskrev-ford.md])])
+AM_CONDITIONAL(WITH_DOC,[test x"$FORD" != x])
 
 # Checks for libraries.
 
@@ -17,7 +32,5 @@ AC_PROG_INSTALL
 
 # Checks for library functions.
 
-AC_CONFIG_FILES([Makefile
-                 src/Makefile
-                 test/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile test/Makefile doc/Makefile])
 AC_OUTPUT

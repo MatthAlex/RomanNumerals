@@ -9,5 +9,6 @@ RomanNum
 test/test*
 !test/test*.f90
 
-doc/
+doc/*
+!doc/Makefile.am
 .vscode/
