@@ -34,3 +34,21 @@ AM_CONDITIONAL(WITH_DOC,[test x"$FORD" != x])
 
 AC_CONFIG_FILES([Makefile src/Makefile test/Makefile doc/Makefile])
 AC_OUTPUT
+
+echo \
+"-------------------------------------------------
+
+ ${PACKAGE_NAME} Version ${PACKAGE_VERSION}
+
+ Prefix: '${prefix}'.
+ Compiler: '${FC} ${FCFLAGS}'
+
+ Package features:
+ Async Execution:
+
+ Now type 'make @<:@<target>@:>@'
+ where the optional <target> is:
+ all                - build all binaries
+ install            - install everything
+ clean              - clean everything
+--------------------------------------------------"
