@@ -44,11 +44,15 @@ echo \
  Compiler: '${FC} ${FCFLAGS}'
 
  Package features:
- Async Execution:
+ Async Execution:  No
 
  Now type 'make @<:@<target>@:>@'
  where the optional <target> is:
  all                - build all binaries
  install            - install everything
+ installcheck
  clean              - clean everything
+ dist               - create a distribution package
+ check              - run tests
+ 
 --------------------------------------------------"
