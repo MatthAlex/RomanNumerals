@@ -32,7 +32,10 @@ AM_CONDITIONAL(WITH_DOC,[test x"$FORD" != x])
 
 # Checks for library functions.
 
-AC_CONFIG_FILES([Makefile src/Makefile test/Makefile doc/Makefile temp/Makefile])
+# --enable-maintainer-mode
+AM_MAINTAINER_MODE
+
+AC_CONFIG_FILES([Makefile src/Makefile test/Makefile doc/Makefile common/Makefile])
 AC_OUTPUT
 
 echo \
@@ -45,7 +48,9 @@ echo \
 
  Package features:
  Async Execution:  No
-
+ Maintaner mode: $(AM_MAINTAINER_MODE)
+ To enable it: --enable-maintainer-mode
+ 
  Now type 'make @<:@<target>@:>@'
  where the optional <target> is:
  all                - build all binaries
