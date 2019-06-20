@@ -32,7 +32,7 @@ AM_CONDITIONAL(WITH_DOC,[test x"$FORD" != x])
 
 # Checks for library functions.
 
-AC_CONFIG_FILES([Makefile src/Makefile test/Makefile doc/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile test/Makefile doc/Makefile temp/Makefile])
 AC_OUTPUT
 
 echo \
@@ -54,5 +54,5 @@ echo \
  clean              - clean everything
  dist               - create a distribution package
  check              - run tests
- 
+
 --------------------------------------------------"
