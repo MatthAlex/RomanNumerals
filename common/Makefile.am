@@ -1,3 +1,4 @@
-noinst_LIBRARIES = libparameters.a libroutines.a
-libparameters_a_SOURCES = parameters.f90
-libroutines_a_SOURCES = routines.f90
+noinst_LIBRARIES = libcommon.a
+libcommon_a_SOURCES = parameters.f90 routines.f90
+
+CLEANFILES = routines.mod parameters.mod

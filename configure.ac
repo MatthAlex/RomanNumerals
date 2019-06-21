@@ -35,7 +35,7 @@ AM_CONDITIONAL(WITH_DOC,[test x"$FORD" != x])
 # --enable-maintainer-mode
 AM_MAINTAINER_MODE
 
-AC_CONFIG_FILES([Makefile src/Makefile test/Makefile doc/Makefile common/Makefile])
+AC_CONFIG_FILES([Makefile common/Makefile src/Makefile test/Makefile doc/Makefile])
 AC_OUTPUT
 
 echo \
@@ -48,7 +48,7 @@ echo \
 
  Package features:
  Async Execution:  No
- Maintaner mode: $(AM_MAINTAINER_MODE)
+ Maintaner mode: Disabled
  To enable it: --enable-maintainer-mode
  
  Now type 'make @<:@<target>@:>@'
@@ -59,5 +59,7 @@ echo \
  clean              - clean everything
  dist               - create a distribution package
  check              - run tests
+
+ Installed at: `which RomanNum`
 
 --------------------------------------------------"
