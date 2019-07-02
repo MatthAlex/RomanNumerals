@@ -4,6 +4,7 @@
 *.mod
 *.bak
 *.dat
+*.a     
 
 RomanNum
 test/test*
@@ -12,6 +13,7 @@ test/test*
 doc/*
 !doc/Makefile.am
 .vscode/
+builddir/
 
 aclocal.m4
 autom4te.cache/
@@ -28,3 +30,18 @@ missing
 taskrev-ford.md
 perf.data
 autoscan.log
+configure.scan
+test-driver
+
+src/Makefile
+doc/Makefile
+test/Makefile
+Makefile
+
+src/Makefile.in
+doc/Makefile.in
+test/Makefile.in
+Makefile.in
+
+src/.deps/
+src/.dirstamp
