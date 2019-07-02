@@ -26,15 +26,15 @@ docmod_DATA=\
    ford/module/routines.html\
    ford/module/RomanNum.html
 
-docsrc_DATA=\
-   ford/src/parameters.f90\
-   ford/src/routines.f90\
-   ford/src/RomanNum.f90
+#docsrc_DATA=\
+#   ford/src/parameters.f90\
+#   ford/src/routines.f90\
+#   ford/src/RomanNum.f90
 
-docsrcf_DATA=\
-   ford/sourcefile/parameters.f90.html\
-   ford/sourcefile/routines.f90.html\
-   ford/sourcefile/RomanNum.f90.html
+#docsrcf_DATA=\
+#   ford/sourcefile/parameters.f90.html\
+#   ford/sourcefile/routines.f90.html\
+#   ford/sourcefile/RomanNum.f90.html
 
 doclst_DATA=\
    ford/lists/files.html\

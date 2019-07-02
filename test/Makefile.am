@@ -6,8 +6,6 @@ AM_DEFAULT_SOURCE_EXT = .f90
 AM_FCFLAGS = -I$(top_builddir)/common
 AM_LDFLAGS = $(top_builddir)/common/libcommon.a
 
-#AM_LDFLAGS = $(top_builddir)/src/parameters.o $(top_builddir)/src/routines.o
-
 # check_SCRIPTS = greptest.sh
 # TESTS = $(check_SCRIPTS)
 
