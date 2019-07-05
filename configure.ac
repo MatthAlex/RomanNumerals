@@ -54,11 +54,10 @@ echo \
  Now type 'make @<:@<target>@:>@'
  where the optional <target> is:
  all                - build all binaries
- install            - install everything
- installcheck
- clean              - clean everything
+ install            - install executable RomanNum
+ clean              - clean all compiled files
  dist               - create a distribution package
- check              - run tests
+ check              - build and run tests
 
  Installed at: `which RomanNum`
 
